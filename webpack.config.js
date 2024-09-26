@@ -1,3 +1,4 @@
+const { log } = require("console");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 
@@ -11,6 +12,8 @@ module.exports = {
 
     },
 
+
+    
     devtool: "eval-source-map",
     devServer: {
         watchFiles: ["./src/template.html"],
@@ -40,4 +43,5 @@ module.exports = {
         ],
     },
 };
+
 

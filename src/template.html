@@ -1,11 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cool Todo List XD</title>
 </head>
+
 <body>
-    <h1>Nice todo list hehe!</h1>
+    <div class="container">
+
+        <div id="sidebar">
+            
+
+            <div class="project-nav-element">
+                <div class="project-nav-element-small">
+                    <div id="my-projects">My Projects</div>
+                    <button id="add-project-button">+</button>
+                </div>
+                <div id="projects-container"></div>
+           
+                <form id="project-form">
+                    <div>
+                        <label for="project-name">Project name?</label>
+                        <input type="text" name="project-name" id="project-name-input">
+                    </div>
+                    <button type="button" id="project-cancel-button">cancel</button>
+                    <button type="button" id="project-save-button">save</button>
+                </form>
+            </div>
+            
+            
+
+        </div>
+        <div id="content">
+            <h1>Cool todo list!</h1>
+        </div>
+    </div>
 </body>
+
 </html>

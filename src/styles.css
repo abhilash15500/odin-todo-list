@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+   color: white;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   
+}
+
+:root {
+    --primary-color :#fcfaf8;
+}
+
+body {
+    overflow: hidden;
+    background: #4CB8C4;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #3CD3AD, #4CB8C4);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #3CD3AD, #4CB8C4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+    grid-template-rows: 0.9fr 0.9fr;
+}
+
+
+
+#sidebar {
+    display: grid;
+    grid-template-rows: 0.3fr 1fr;
+    border: 2px solid black;
+    height: 100vh;
+    background-color: royalblue;
+    padding: 10px;
+    
+}
+
+
+#name {
+   display: flex;
+   flex-direction: row;
+   gap: 10px;
+}
+
+
+#myName {
+   margin-top: 0.7rem;
+   font-weight: 800;
+}
+
+#edit-name-button {
+    background-color: black;
+    width: 5rem;
+    height: 2rem;
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
+img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+#my-projects {
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+
+#add-project-button {
+    background-color: #ff0000;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ff0000;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 30px;
+};
+
+.project-nav-element {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.new-project-div {
+    background-color: coral;
+    padding: 1rem;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+
+.project-nav-element-small {
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+#project-form {
+    position: absolute;
+    visibility: hidden;
+    left: 40vw;
+    top: 25vh;
+    background-color: black;
+    padding: 3rem;
+    box-shadow: 0 0 10px 500vw rgba(0, 0, 0, 0.6);
+}
+
+
+#project-name-input {
+     color: black;
+}
+
+
+#content {
+    border: 2px solid black;
+    height: 100vh;
+    background-color: darkgrey;
+   
+}
