@@ -9,7 +9,8 @@ import {
     onAddProjectButtonClickDOM,
     onProjectCancelButtonClickDOM,
     cancelProjectButton,
-    projectsContainer
+    projectsContainer,
+    projectDeleteButton
 } from "./domStuff.js";
 
 const projects = [{
@@ -70,6 +71,7 @@ addProjectButton.addEventListener("click", (event) => {
 
 projectSaveButton.addEventListener("click", () => {
     onProjectSaveButtonClickDOM();
+   
 });
 
 cancelProjectButton.addEventListener("click", () => {
@@ -81,3 +83,5 @@ cancelProjectButton.addEventListener("click", () => {
 export {
     Project,projects
 }
+
+

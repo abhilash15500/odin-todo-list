@@ -19,12 +19,21 @@ function onProjectSaveButtonClickDOM() {
     let newProjectDiv = document.createElement("div");
     newProjectDiv.classList.add("new-project-div");
     newProjectDiv.textContent = title;
+
+    let projectDeleteButton = document.createElement("button");
+    
+    projectDeleteButton.classList.add("project-del-button"); // Add class
+    projectDeleteButton.textContent = "X";
+
+    
+    
     projectsContainer.appendChild(newProjectDiv);
     addProjectForm.style.visibility = "hidden";
     projectNameInput.value = ""; // Clear the input field
     newProjectDiv.setAttribute("data-index-number",projects.length);
 
 
+    newProjectDiv.appendChild(projectDeleteButton);
     let newProject = new Project(title);
     newProject.pushProject();
     console.log(projects);
@@ -45,5 +54,6 @@ export {
     onProjectSaveButtonClickDOM,
     onAddProjectButtonClickDOM,
     onProjectCancelButtonClickDOM,
-    projectsContainer
+    projectsContainer,
+   
 };
