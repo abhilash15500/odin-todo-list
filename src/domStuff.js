@@ -8,6 +8,7 @@ const projectNameInput = document.querySelector("#project-name-input");
 const cancelProjectButton = document.querySelector("#project-cancel-button");
 const projectsContainer = document.querySelector("#projects-container");
 
+
 function onAddProjectButtonClickDOM(event) {
     event.preventDefault(); // Prevents the default form submission behavior
     addProjectForm.style.visibility = "visible";
@@ -20,8 +21,8 @@ function onProjectSaveButtonClickDOM() {
     newProjectDiv.classList.add("new-project-div");
     newProjectDiv.textContent = title;
 
-    let projectDeleteButton = document.createElement("button");
     
+    let projectDeleteButton = document.createElement("button");
     projectDeleteButton.classList.add("project-del-button"); // Add class
     projectDeleteButton.textContent = "X";
 
@@ -36,14 +37,32 @@ function onProjectSaveButtonClickDOM() {
     newProjectDiv.appendChild(projectDeleteButton);
     let newProject = new Project(title);
     newProject.pushProject();
-    console.log(projects);
+    console.log(projects);  
+
+
+    projectDeleteButton.addEventListener("click", (event) => {
+        let indexNumber = event.target.parentElement.dataset.indexNumber;
+        console.log(indexNumber);
+
+        delete projects[indexNumber];
+
+        newProjectDiv.remove();
+  
+    });
+
     
-}
+};
+
+
 
 function onProjectCancelButtonClickDOM() {
     addProjectForm.style.visibility = "hidden";
-    projectNameInput.value = ""; // Clear the input field
-}
+    projectNameInput.value = ""; 
+};
+
+
+
+
 
 export {
     cancelProjectButton,
@@ -55,5 +74,6 @@ export {
     onAddProjectButtonClickDOM,
     onProjectCancelButtonClickDOM,
     projectsContainer,
+    
    
 };

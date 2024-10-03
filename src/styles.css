@@ -18,6 +18,15 @@ background: linear-gradient(to right, #3CD3AD, #4CB8C4); /* W3C, IE 10+/ Edge, F
 
 }
 
+
+h1 {
+    text-align: center;
+    background-color: #1e1e2e;
+    width: 20rem;
+    padding: 10px;
+    margin: auto;
+}
+
 .container {
     display: grid;
     grid-template-columns: 0.2fr 1fr;
@@ -64,21 +73,26 @@ img {
 }
 
 #my-projects {
+    margin-left: 1rem;
     font-weight: 800;
     font-size: 1.5rem;
 }
 
 
 #add-project-button {
-    background-color: #ff0000;
+    background-color: green;
     color: white;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    border: 2px solid #ff0000;
+    border: 2px solid green;
     cursor: pointer;
     font-weight: 800;
     font-size: 30px;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center;     /* Centers vertically */;
+    margin: auto;
 };
 
 .project-nav-element {
@@ -94,16 +108,26 @@ img {
     border-radius: 10px;
     display: flex;
     justify-content: space-between;
+    margin-left: 1rem;
 }
 
+
+.new-project-div:hover {
+    background-color: darkgray;
+    transition: 400ms;
+    cursor: pointer;
+}
 
 .project-del-button {
     background-color: red;
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    border: 3px solid red;
+    border: 5px solid red;
+    cursor: pointer;
 }
+
+
 
 .project-nav-element-small {
     display: flex;
@@ -142,5 +166,5 @@ h2 {
     margin: 10px;
     margin-top:  50px;
     background-color: #1e1e2e; /* Dark background */
-            color: #f4f4f9; /* Light text color */
+    color: #f4f4f9; /* Light text color */
 }

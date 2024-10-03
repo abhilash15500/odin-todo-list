@@ -10,7 +10,7 @@ import {
     onProjectCancelButtonClickDOM,
     cancelProjectButton,
     projectsContainer,
-    projectDeleteButton
+   
 } from "./domStuff.js";
 
 const projects = [{
@@ -38,7 +38,7 @@ class Todo {
 }
 
 class Project {
-    constructor(title, todos = [],indexNumber) {
+    constructor(title, todos = []) {
         this.title = title;
         this.todos = todos;
         
@@ -77,6 +77,7 @@ projectSaveButton.addEventListener("click", () => {
 cancelProjectButton.addEventListener("click", () => {
     onProjectCancelButtonClickDOM();
 });
+
 
 
 
