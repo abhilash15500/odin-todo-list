@@ -62,7 +62,7 @@ class Project {
 
     deleteProject() {
         let uniqueIdOfProject = this.uniqueId;
-        currentProjectIndexToDelete = myProjects.findIndex(project => project.uniqueId == uniqueIdOfProject);
+        let currentProjectIndexToDelete = myProjects.findIndex(project => project.uniqueId == uniqueIdOfProject);
         delete myProjects[currentProjectIndexToDelete];
 
     };
@@ -79,8 +79,6 @@ class Project {
             console.log(project.title); 
         });
     };
-
-
 };
 
 
@@ -99,9 +97,3 @@ const todo2 = new Todo("h","dsa","Ds","h",false)
 todo1.pushTodoToArray();
 todo2.pushTodoToArray();
 
-
-
-// defaultProject.deleteProject();
-
-
-anotherNewProject.viewTodos();
