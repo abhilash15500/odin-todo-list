@@ -34,7 +34,7 @@ class Todo {
 
 
 class Project {
-    constructor(title, todos = [],uniqueId) {
+    constructor(title, todos = [], uniqueId) {
         this.title = title;
         this.todos = todos;
         this.uniqueId = Math.floor(Math.random() * 10000);
@@ -47,7 +47,7 @@ class Project {
 
     currentProjectIdentifier() {
         let uniqueIdOfProject = this.uniqueId
-        const currentProjectIndex = myProjects.findIndex(project => project.uniqueId == uniqueIdOfProject);
+        currentProjectIndex = myProjects.findIndex(project => project.uniqueId == uniqueIdOfProject);
         console.log(currentProjectIndex);
     };
 };
@@ -58,20 +58,19 @@ defaultProject.pushProjectToArray();
 
 
 
+
 let anotherNewProject = new Project("idk");
 anotherNewProject.pushProjectToArray();
+anotherNewProject.currentProjectIdentifier();
 
 
-const todo1 = new Todo(
-    "Finish Homework",          // title
-    "Complete the math homework", // description
-    "2024-10-30",               // dueDate
-    "High",                     // priority
-    false                       // completed (default is false)
-);
+const todo1 = new Todo("Finish Homework","Complete the math homework","2024-10-30","High",false);
+
+
 
 todo1.pushTodoToArray();
 
 
 console.log(myProjects);
+
 
