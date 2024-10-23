@@ -23,7 +23,7 @@ class Todo {
 
     pushTodoToArray() {
         if (currentProjectIndex == undefined) {
-            myProjects[0].todo.push(this);
+            myProjects[0].todos.push(this);
         }
 
         else if (currentProjectIndex) {
@@ -60,7 +60,18 @@ defaultProject.pushProjectToArray();
 
 let anotherNewProject = new Project("idk");
 anotherNewProject.pushProjectToArray();
-anotherNewProject.currentProjectIdentifier();
-defaultProject.currentProjectIdentifier();
+
+
+const todo1 = new Todo(
+    "Finish Homework",          // title
+    "Complete the math homework", // description
+    "2024-10-30",               // dueDate
+    "High",                     // priority
+    false                       // completed (default is false)
+);
+
+todo1.pushTodoToArray();
+
+
 console.log(myProjects);
 
