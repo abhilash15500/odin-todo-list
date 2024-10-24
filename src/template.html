@@ -1,11 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Todo list</title>
+    <link rel="shortcut icon" type="image/png" href="./images/todo-icon.png" />
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add_circle" />
+
+
 </head>
+
 <body>
-    
+
+    <div id="main-container">
+        <div id="sidebar">
+
+            <div id="logo-div">
+                <img src="./images/todo-icon.png" alt="logo" id="logo-image">
+
+            </div>
+
+
+            <div id="add-project-div" class="sidebar-elements">
+                <span class="material-symbols-outlined" id="add-project-icon">
+                    add_circle
+                </span>
+                <p id="add-project-button-text">Add Project</p>
+            </div>
+
+            <div id="project-div" class="sidebar-elements">
+                <p id="project-label">Projects</p>
+
+
+
+                <div class="project-instances sidebar-elements">
+                    <div class="orange-circle"></div>
+                    <p class="project-instance-text">Untitled Project</p>
+                    
+                </div>
+
+                <div class="project-instances sidebar-elements">
+                    <div class="orange-circle"></div>
+                    <p class="project-instance-text">Work goals</p>
+                </div>
+
+
+                <div class="project-instances sidebar-elements">
+                    <div class="orange-circle"></div>
+                    <p class="project-instance-text">Odin Project</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="content">
+            <div class="content-elements">
+                <h2 id="current-project-heading">Untitled Project</h2>
+                
+            </div>
+
+            <div class="todos-container content-elements">
+                <div class="todo-checkbox-title-div">
+                        <div class="todo-checkboxes"></div>
+                        <p>Fix the bugs in todolist project</p>
+                </div>
+
+                <div class="todo-buttons-div">
+                    <img src="./images/edit-svg.svg" class="todo-buttons" id="todo-edit-button">
+                    <img src="./images/delete-svg.svg" class="todo-buttons" id="todo-delete-button">
+                </div>
+            </div>
+
+
+            <div class="todos-container content-elements">
+                <div class="todo-checkbox-title-div">
+                        <div class="todo-checkboxes"></div>
+                        <p>Fix the bugs in todolist project</p>
+                </div>
+
+                <div class="todo-buttons-div">
+                    <img src="./images/edit-svg.svg" class="todo-buttons" id="todo-edit-button">
+                    <img src="./images/delete-svg.svg" class="todo-buttons" id="todo-delete-button">
+                </div>
+            </div>
+
+
+
+            <div class="todos-container content-elements">
+                <div class="todo-checkbox-title-div">
+                        <div class="todo-checkboxes"></div>
+                        <p>Fix the bugs in todolist project</p>
+                </div>
+
+                <div class="todo-buttons-div">
+                    <img src="./images/edit-svg.svg" class="todo-buttons" id="todo-edit-button">
+                    <img src="./images/delete-svg.svg" class="todo-buttons" id="todo-delete-button">
+                </div>
+            </div>
+
+
+            
+
+        </div>
+    </div>
+
+
 </body>
+
 </html>

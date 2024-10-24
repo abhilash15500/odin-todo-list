@@ -1,5 +1,158 @@
-/* styles.css */
-body {
-    background-color: rebeccapurple;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+  color: white;
+  font-weight: 400;
+}
+
+#main-container {
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+  grid-template-columns: 0.2fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+#sidebar {
+  background-color: #282828;
+
+}
+
+#content {
+  background-color: #1e1e1e;
+}
+
+#logo-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+}
+
+#logo-image {
+  height: 40%;
+  width: 40%;
+  margin-bottom: calc(1rem + 15px);
+}
+
+
+
+#project-label {
+  font-size: 15px;
+  font-weight: 400 ;
+  color: white;
+  background-color: #afb3ac41;
+  padding: 10px;
   
+  border-radius: 8px;
+
+  
+}
+
+.sidebar-elements {
+  margin:15px;
+}
+
+#add-project-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  gap: 5px;
+  cursor: pointer;
+}
+
+
+
+#add-project-button-text {
+  color: orangered;
+  font-weight: 600;
+}
+
+#add-project-icon {
+  color: orangered;
+}
+
+
+.project-instances {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 5px;
+  border-radius: 8px;
+  gap: 8px;
+ 
+}
+
+.project-instances:hover {
+  background-color: #4b4c4a;
+  transition: 300ms;
+cursor: pointer;
+}
+
+.project-instance-text {
+  font-size: 15px;
+}
+
+
+.orange-circle {
+  background-color: orangered;
+  border-radius: 50%;
+  height: 11px;
+  width: 11px;
+}
+
+
+.content-elements {
+  margin-left: 10vw;
+}
+
+#current-project-heading {
+  font-weight: 800;
+  font-size: 45px;
+  margin-top: 50px;
+  color: orangered;
+  margin-bottom: 55px;
+}
+
+
+
+.todo-checkbox-title-div {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  
+}
+
+
+.todos-container {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.277);
+  padding-bottom: 15px;
+  padding-left: 10px;
+  width: 70%;
+  margin-bottom: 20px;
+}
+
+
+.todo-buttons-div {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.todo-buttons {
+  cursor: pointer;
+}
+
+
+.todo-checkboxes {
+  border: 3px solid orangered;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+}
