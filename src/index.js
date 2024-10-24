@@ -31,6 +31,19 @@ class Todo {
         else if (currentProjectIndex) {
             myProjects[currentProjectIndex].todos.push(this);
         };
+
+
+       
+    };
+
+    viewTodo() {
+        console.log(this);
+    };
+
+    editTodo(newTitle,newDueDate,newPriority) {
+        this.title = newTitle;
+        this.dueDate = newDueDate;
+        this.priority = newPriority; 
     };
 
 
@@ -74,11 +87,20 @@ class Project {
     };
 
 
+
+
+
+
     static viewAllProjects() {
         myProjects.forEach(project => {
             console.log(project.title); 
         });
     };
+
+
+
+
+    
 };
 
 
@@ -96,4 +118,9 @@ const todo1 = new Todo("Finish Homework","Complete the math homework","2024-10-3
 const todo2 = new Todo("h","dsa","Ds","h",false)
 todo1.pushTodoToArray();
 todo2.pushTodoToArray();
+
+
+todo1.editTodo("new title","10-20-303","low");
+console.log(myProjects);
+
 
