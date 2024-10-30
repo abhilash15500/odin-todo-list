@@ -1,4 +1,10 @@
 import "./styles.css";
+import { displayProjects } from "./dom.js";
+
+
+const projectDiv = document.querySelector("#project-div");
+
+
 
 const myProjects = [];
 
@@ -88,18 +94,12 @@ class Project {
 
 
 
-
-
-
     static viewAllProjects() {
-        myProjects.forEach(project => {
-            console.log(project.title); 
-        });
+        return myProjects.map(project => ({
+            title: project.title,
+            uniqueId: project.uniqueId
+        }));
     };
-
-
-
-
     
 };
 
@@ -121,6 +121,16 @@ todo2.pushTodoToArray();
 
 
 todo1.editTodo("new title","10-20-303","low");
-console.log(myProjects);
+// console.log(myProjects);
 
 
+console.log(Project.viewAllProjects());
+
+
+displayProjects(projectDiv);
+
+
+
+
+
+export {Project}

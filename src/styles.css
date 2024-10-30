@@ -115,6 +115,14 @@ cursor: pointer;
 
 .content-elements {
   margin-left: 10vw;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+
+.add-todos-button {
+  margin-top: 4px;
 }
 
 #current-project-heading {
