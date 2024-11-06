@@ -133,4 +133,4 @@ displayProjects(projectDiv);
 
 
 
-export {Project}
+export {Project,myProjects,projectDiv}

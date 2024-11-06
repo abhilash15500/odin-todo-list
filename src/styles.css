@@ -194,3 +194,17 @@ cursor: pointer;
 .due-date-text-striked {
   text-decoration: line-through;
 }
+
+
+#project-add-dialog {
+  top: 40vh;
+  left: 40vw;
+  background-color: #1e1e1e;
+  padding: 10px;
+  
+};
+
+
+.text-input {
+  color: red;
+}
