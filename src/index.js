@@ -78,6 +78,7 @@ class Project {
         console.log(currentProjectIndex);
     };
 
+    
 
     deleteProject() {
         let uniqueIdOfProject = this.uniqueId;
@@ -85,6 +86,8 @@ class Project {
         delete myProjects[currentProjectIndexToDelete];
 
     };
+
+
 
     viewTodos() {
         this.todos.forEach(todo => {

@@ -43,11 +43,13 @@ function displayProjects(projectDiv) {
     projectInstances.appendChild(projectDeleteButton);
   });
 
-  // After appending all the delete buttons, add event listeners to them
+ 
   const projectDeleteButtons = document.querySelectorAll(".project-delete-button");
   projectDeleteButtons.forEach(button => {
     button.addEventListener("click", () => {
       removeProjectDiv(button);
+
+      
 
     });
   });
@@ -89,6 +91,9 @@ projectAddSaveButton.addEventListener("click",()=>{
  let newProject = new Project(textInputProjectTitle.value);
   newProject.pushProjectToArray();
  closeProjectAddDialog();
+
+ 
+ 
  
  console.log(myProjects);
  
