@@ -76,6 +76,7 @@ class Project {
         let uniqueIdOfProject = this.uniqueId
         currentProjectIndex = myProjects.findIndex(project => project.uniqueId == uniqueIdOfProject);
         console.log(currentProjectIndex);
+        return currentProjectIndex;
     };
 
     
@@ -88,13 +89,12 @@ class Project {
     };
 
 
-
     viewTodos() {
-        this.todos.forEach(todo => {
-            console.log(`Title - ${todo.title} , DueDate - ${todo.dueDate} and Priority is ${todo.priority}`);
+        return this.todos.map(todo => {
+            return { title: todo.title, dueDate: todo.dueDate };
         });
     };
-
+    
 
 
     static viewAllProjects() {
@@ -110,6 +110,7 @@ class Project {
 
 // this is to initialize default project
 let defaultProject = new Project("Default Project");
+
 defaultProject.pushProjectToArray();
 
 // testing console version
@@ -117,14 +118,15 @@ let anotherNewProject = new Project("idk");
 anotherNewProject.pushProjectToArray();
 anotherNewProject.currentProjectIdentifier();
 
-const todo1 = new Todo("Finish Homework","Complete the math homework","2024-10-30","High",false);
-const todo2 = new Todo("h","dsa","Ds","h",false)
+const todo1 = new Todo("Finish Homework", "Complete the math homework", "2024-10-30", "High", false);
+const todo2 = new Todo("Grocery Shopping", "Buy fruits and vegetables", "2024-11-01", "Medium", false);
+const todo3 = new Todo("Learn Webpack", "Study asset bundling and loaders", "2024-11-15", "High", false);
+
 todo1.pushTodoToArray();
 todo2.pushTodoToArray();
+todo3.pushTodoToArray();
 
 
-todo1.editTodo("new title","10-20-303","low");
-// console.log(myProjects);
 
 
 console.log(Project.viewAllProjects());
