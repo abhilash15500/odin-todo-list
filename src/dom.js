@@ -1,6 +1,8 @@
 import { Project, myProjects, projectDiv } from "./index.js";
 
 import deleteIcon from './images/delete-svg.svg';
+import calendarIcon from './images/calender.svg';
+import editIcon from './images/edit-svg.svg';
 
 
 
@@ -94,7 +96,7 @@ function displayProjects(projectDiv) {
 
 
 function displayElementsInContent(currentProjectIndex) {
-
+todosContainerHolder.innerHTML  = "";
     currentProjectHeading.textContent = myProjects[currentProjectIndex].title;
 
     let currentProjectTodos = myProjects[currentProjectIndex].todos;
@@ -111,6 +113,7 @@ function displayElementsInContent(currentProjectIndex) {
 
       let dateImage = document.createElement("img");
       dateImage.classList.add("due-date-icon");
+     dateImage.src = calendarIcon;
 
 
       let dueDateParagraph = document.createElement("p");
@@ -119,9 +122,11 @@ function displayElementsInContent(currentProjectIndex) {
 
       let editImage = document.createElement("img");
       editImage.classList.add("todo-buttons");
+      editImage.src = editIcon;
 
       let deleteImage = document.createElement("img");
       deleteImage.classList.add("todo-buttons");
+      deleteImage.src  = deleteIcon;
 
 
       let todoCheckBoxTitleDiv = document.createElement("div");
@@ -166,8 +171,7 @@ function displayElementsInContent(currentProjectIndex) {
 
       let dateImage = document.createElement("img");
       dateImage.classList.add("due-date-icon");
-      dateImage.setAttribute("src", "./images/calender.svg");
-     
+      dateImage.src = calendarIcon;
 
       let dueDateParagraph = document.createElement("p");
       dueDateParagraph.classList.add("due-date-text","due-date-text-striked");
@@ -175,10 +179,12 @@ function displayElementsInContent(currentProjectIndex) {
 
       let editImage = document.createElement("img");
       editImage.classList.add("todo-buttons");
+      editImage.src = editIcon;
+
 
       let deleteImage = document.createElement("img");
       deleteImage.classList.add("todo-buttons");
-
+      deleteImage.src = deleteIcon;
 
 
 
@@ -207,7 +213,7 @@ function displayElementsInContent(currentProjectIndex) {
 
       dueDateDiv.append(dateImage,dueDateParagraph);
 
-      todoButtonsDiv.append(editImage,deleteIcon);
+      todoButtonsDiv.append(editImage,deleteImage);
 
 
 
