@@ -4,13 +4,12 @@ import { displayProjects,displayElementsInContent } from "./dom.js";
 
 const projectDiv = document.querySelector("#project-div");
 
-
-
-const myProjects = [];
+const myProjects = [];   // array to store all the projects
 
 let currentProjectIndex;
 let currentTodoIndex;
 
+// constructors for todos and projects
 class Todo {
     constructor(title, description, dueDate, priority, completed = false,uniqueId) {
         this.title = title;
@@ -104,6 +103,10 @@ class Project {
     
 };
 
+
+
+
+//INITIALIATION OF THE APP!!!!!!!!!!!!!! HEHE
 // This is to initialize the default project
 let defaultProject = new Project("Default Project");
 defaultProject.pushProjectToArray();

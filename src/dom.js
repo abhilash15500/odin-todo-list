@@ -36,18 +36,15 @@ function displayProjects(projectDiv) {
     let orangeCircle = document.createElement("div");
     orangeCircle.classList.add("orange-circle");
 
+
+   
+
+
     let projectInstanceText = document.createElement("p");
     projectInstanceText.classList.add("project-instance-text");
     projectInstanceText.textContent = project.title;
 
-      // event listener to stop propogration//
-      projectInstanceText.addEventListener("click", (event) => {
-        event.currentTarget.parentElement.click();
-       
-        event.stopPropagation();
-      });
-    
-
+     
 
 
     let projectDeleteButton = document.createElement("img");
@@ -62,8 +59,9 @@ function displayProjects(projectDiv) {
     // Add click event listener to each project instance
     projectInstances.addEventListener("click", (event) => {
       
+        console.log("event fired hehe!");
         
-      let uniqueIdOfProject = event.target.getAttribute("data-index");
+      let uniqueIdOfProject = event.currentTarget.getAttribute("data-index");
      
       console.log(myProjects);
       console.log(uniqueIdOfProject);
