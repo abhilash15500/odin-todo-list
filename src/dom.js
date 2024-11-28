@@ -13,6 +13,9 @@ const content = document.querySelector("#content");
 const todosContainerHolder = document.querySelector("#todos-container-holder");
 const todosCheckboxes = document.querySelectorAll(".todo-checkboxes");
 
+
+
+
 function displayProjects(projectDiv) {
   projectDiv.innerHTML = "";
   let listOfProjects = Project.viewAllProjects();
@@ -37,6 +40,16 @@ function displayProjects(projectDiv) {
     projectInstanceText.classList.add("project-instance-text");
     projectInstanceText.textContent = project.title;
 
+      // event listener to stop propogration//
+      projectInstanceText.addEventListener("click", (event) => {
+        event.currentTarget.parentElement.click();
+       
+        event.stopPropagation();
+      });
+    
+
+
+
     let projectDeleteButton = document.createElement("img");
     projectDeleteButton.classList.add("project-delete-button");
     projectDeleteButton.src = deleteIcon;
@@ -48,12 +61,17 @@ function displayProjects(projectDiv) {
 
     // Add click event listener to each project instance
     projectInstances.addEventListener("click", (event) => {
+      
+        
       let uniqueIdOfProject = event.target.getAttribute("data-index");
+     
+      console.log(myProjects);
       console.log(uniqueIdOfProject);
-
+      
+      
       let currentProjectIndex = myProjects.findIndex(project => project.uniqueId == uniqueIdOfProject);
       console.log(currentProjectIndex);
-
+      
       displayElementsInContent(currentProjectIndex);
     });
   });
@@ -70,6 +88,9 @@ function displayProjects(projectDiv) {
     });
   });
 }
+
+
+
 
 function displayElementsInContent(currentProjectIndex) {
   todosContainerHolder.innerHTML = "";
@@ -177,17 +198,7 @@ function displayElementsInContent(currentProjectIndex) {
   });
 }
 
-function findIndexOfElement(element) {
-  let targetIndex = 0;
-  myProjects.forEach(project => {
-    if (project.uniqueId == element) {
-      return targetIndex;
-      console.log(targetIndex);
-    } else {
-      targetIndex = targetIndex + 1;
-    }
-  });
-}
+
 
 function updateCurrentProjectHeading(currentProjectHeading, projectInstanceText) {
   currentProjectHeading.textContent = projectInstanceText.textContent;
@@ -235,4 +246,4 @@ projectAddSaveButton.addEventListener("click", () => {
   displayProjects(projectDiv);
 });
 
-export { displayProjects };
+export { displayProjects,displayElementsInContent };
