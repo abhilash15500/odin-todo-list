@@ -69,6 +69,8 @@ function displayProjects(projectDiv) {
       
       let currentProjectIndex = myProjects.findIndex(project => project.uniqueId == uniqueIdOfProject);
       console.log(currentProjectIndex);
+      myProjects[currentProjectIndex].currentProjectIdentifier();
+      
       
       displayElementsInContent(currentProjectIndex);
     });
@@ -122,7 +124,19 @@ function displayElementsInContent(currentProjectIndex) {
       deleteImage.src = deleteIcon;
 
       deleteImage.addEventListener("click", (event) => {
-        event.target.parentElement.parentElement.remove();
+        
+        event.target.parentElement.parentElement.remove();  // for dom
+
+        // for logic
+        let currentTodoDataIndex = event.target.parentElement.parentElement.getAttribute('data-index');
+        let currentTodoIndex = myProjects[currentProjectIndex].todos.findIndex(todo => todo !== undefined && todo.uniqueId == currentTodoDataIndex);
+
+
+
+        delete myProjects[currentProjectIndex].todos[currentTodoIndex];
+        console.log(myProjects);
+        
+
       });
 
       let todoCheckBoxTitleDiv = document.createElement("div");
@@ -145,9 +159,12 @@ function displayElementsInContent(currentProjectIndex) {
       todoCheckBoxTitleDiv.append(orangeFilledCircleDiv, finishedTodoParagraph);
       dueDateDiv.append(dateImage, dueDateParagraph);
       todoButtonsDiv.append(editImage, deleteImage);
+
     } else if (todo.completed == false) {
       let orangeUnfilledCircleDiv = document.createElement("div");
       orangeUnfilledCircleDiv.classList.add("todo-checkboxes");
+
+      
 
       let todoParagraph = document.createElement("p");
       todoParagraph.textContent = todo.title;
@@ -157,7 +174,7 @@ function displayElementsInContent(currentProjectIndex) {
       dateImage.src = calendarIcon;
 
       let dueDateParagraph = document.createElement("p");
-      dueDateParagraph.classList.add("due-date-text", "due-date-text-striked");
+      dueDateParagraph.classList.add("due-date-text");
       dueDateParagraph.textContent = todo.dueDate;
 
       let editImage = document.createElement("img");
@@ -169,7 +186,17 @@ function displayElementsInContent(currentProjectIndex) {
       deleteImage.src = deleteIcon;
 
       deleteImage.addEventListener("click", (event) => {
-        event.target.parentElement.parentElement.remove();
+        
+        event.target.parentElement.parentElement.remove();  //dom
+
+        //logic
+
+        // for logic
+        let currentTodoDataIndex = event.target.parentElement.parentElement.getAttribute('data-index');
+        let currentTodoIndex = myProjects[currentProjectIndex].todos.findIndex(todo => todo !== undefined && todo.uniqueId == currentTodoDataIndex);
+        delete myProjects[currentProjectIndex].todos[currentTodoIndex];
+        console.log(myProjects);
+        
       });
 
       let todoCheckBoxTitleDiv = document.createElement("div");
