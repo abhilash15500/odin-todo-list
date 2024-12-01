@@ -231,6 +231,7 @@ function updateCurrentProjectHeading(currentProjectHeading, projectInstanceText)
 
 function removeProjectFromArray(uniqueIdOfButtonDiv) {
   let indexToDelete = myProjects.findIndex(project => project.uniqueId == uniqueIdOfButtonDiv);
+
   myProjects[indexToDelete].deleteProject();
   console.log(myProjects);
 }
