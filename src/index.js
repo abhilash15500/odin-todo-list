@@ -22,6 +22,11 @@ class Todo {
         this.completed = true;
     }
 
+
+    markTodoAsIncomplete() {
+        this.completed = false;
+    }
+
     changeTodoPriority(priority) {
         this.priority = priority;
     }
@@ -94,6 +99,21 @@ class Project {
         }));
     }
 }
+
+
+
+function onTodoDialogSaveButtonClick() {
+    let textInputTodoTitleValue = document.querySelector("#text-input-todo-title").value;
+    let textInputTodoDescriptionValue = document.querySelector("#text-input-todo-description").value;
+    let textInputTodoDueDateValue = document.querySelector("#text-input-todo-due-date").value;
+    let textInputTodoPriorityValue = document.querySelector("#todo-priority").value;
+
+    let newTodo = new Todo(textInputTodoTitleValue,textInputTodoDescriptionValue,textInputTodoDueDateValue,textInputTodoPriorityValue);
+
+    newTodo.pushTodoToArray();
+}
+
+
 
 // INITIALIZATION OF THE APP
 // This is to initialize the default project
@@ -178,6 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(Project.viewAllProjects());
     displayProjects(projectDiv);
     displayElementsInContent(0);
+   
 });
 
 
@@ -191,4 +212,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-export { Project, myProjects, projectDiv };
+export { Project, myProjects, projectDiv,onTodoDialogSaveButtonClick};

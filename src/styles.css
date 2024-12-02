@@ -207,6 +207,14 @@ cursor: pointer;
   
 };
 
+#todo-add-dialog {
+  top: 40vh;
+  left: 40vw;
+  background-color: #1e1e1e;
+  padding: 10px;
+
+}
+
 
 .text-input {
   color: red;

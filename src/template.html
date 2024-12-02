@@ -127,6 +127,42 @@
                 </div>
             </form>
         </dialog>
+
+
+        
+        <dialog id="todo-add-dialog">
+            <form action="">
+                <div>
+                    <label for="todo-title">Todo Title?</label>
+                    <input type="text" required id="text-input-todo-title">
+                </div>
+
+                <div>
+                    <label for="todo-description">Todo description?</label>
+                    <input type="text" required id="text-input-todo-description">
+                </div>
+                
+                <div>
+                    <label for="todo-due-date">Todo due date?</label>
+                    <input type="date" required id="text-input-todo-due-date">
+                </div>
+
+                <div>
+                    <label for="todo-priority">Priority?</label>
+                    <select id="todo-priority" required>
+                        <option value="high">High</option>
+                        <option value="mid">Mid</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                
+
+                <div>
+                    <button id="todo-add-cancel-button" type="button">Cancel</button>
+                    <button id="todo-add-save-button" type="button">Save</button>
+                </div>
+            </form>
+        </dialog>
     </div>
 
 

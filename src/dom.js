@@ -1,4 +1,4 @@
-import { Project, myProjects, projectDiv } from "./index.js";
+import { Project, myProjects, onTodoDialogSaveButtonClick, projectDiv } from "./index.js";
 import deleteIcon from './images/delete-svg.svg';
 import calendarIcon from './images/calender.svg';
 import editIcon from './images/edit-svg.svg';
@@ -12,6 +12,37 @@ const currentProjectHeading = document.querySelector("#current-project-heading")
 const content = document.querySelector("#content");
 const todosContainerHolder = document.querySelector("#todos-container-holder");
 const todosCheckboxes = document.querySelectorAll(".todo-checkboxes");
+
+const addTodoButton = document.querySelector(".add-todos-button");
+const todoAddDialog = document.querySelector("#todo-add-dialog");
+const todoAddDialogCancelButton  = document.querySelector("#todo-add-cancel-button");
+const todoAddDialogSaveButton = document.querySelector("#todo-add-save-button");
+
+let currentProjectIndexForOperation;
+
+addTodoButton.addEventListener("click",()=>{
+  console.log("hiiiiiiii");
+  todoAddDialog.showModal();
+  
+});
+
+
+todoAddDialogCancelButton.addEventListener("click",()=>{
+  todoAddDialog.close();
+})
+
+todoAddDialogSaveButton.addEventListener("click",()=>{
+  onTodoDialogSaveButtonClick();
+  todoAddDialog.close();
+  console.log(myProjects);
+  console.log(currentProjectIndexForOperation);
+  if(currentProjectIndexForOperation == undefined) {
+    currentProjectIndexForOperation = 0;
+  }
+  displayElementsInContent(currentProjectIndexForOperation);
+ 
+  
+})
 
 
 
@@ -67,12 +98,14 @@ function displayProjects(projectDiv) {
       console.log(uniqueIdOfProject);
       
       
-      let currentProjectIndex = myProjects.findIndex(project => project.uniqueId == uniqueIdOfProject);
-      console.log(currentProjectIndex);
-      myProjects[currentProjectIndex].currentProjectIdentifier();
+      currentProjectIndexForOperation = myProjects.findIndex(project => project.uniqueId == uniqueIdOfProject);
+      console.log(currentProjectIndexForOperation);
+      currentProjectIndexForOperation = myProjects[currentProjectIndexForOperation].currentProjectIdentifier();
+
       
       
-      displayElementsInContent(currentProjectIndex);
+      
+      displayElementsInContent(currentProjectIndexForOperation);
     });
   });
 
@@ -272,4 +305,4 @@ projectAddSaveButton.addEventListener("click", () => {
   displayProjects(projectDiv);
 });
 
-export { displayProjects,displayElementsInContent };
+export { displayProjects,displayElementsInContent};
