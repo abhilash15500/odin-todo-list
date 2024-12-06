@@ -73,19 +73,13 @@ class Project {
     currentProjectIdentifier() {
         let uniqueIdOfProject = this.uniqueId;
         currentProjectIndex = myProjects.findIndex(
-            (project) => project.uniqueId == uniqueIdOfProject
+            (project) => project !== undefined && project.uniqueId == uniqueIdOfProject
         );
         console.log(`${currentProjectIndex} is the current project index!`);
         return currentProjectIndex;
     }
 
-    deleteProject() {
-        let uniqueIdOfProject = this.uniqueId;
-        let currentProjectIndexToDelete = myProjects.findIndex(
-            (project) => project.uniqueId == uniqueIdOfProject
-        );
-        delete myProjects[currentProjectIndexToDelete];
-    }
+  
 
     viewTodos() {
         return this.todos.map((todo) => {

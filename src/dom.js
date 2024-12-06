@@ -2,6 +2,7 @@ import { Project, myProjects, onTodoDialogSaveButtonClick, projectDiv } from "./
 import deleteIcon from './images/delete-svg.svg';
 import calendarIcon from './images/calender.svg';
 import editIcon from './images/edit-svg.svg';
+import todoListHigherImg from "./images/todolisthigher.png";
 
 const projectAddDialog = document.querySelector("#project-add-dialog");
 const addProjectButton = document.querySelector("#add-project-div");
@@ -88,6 +89,7 @@ function displayProjects(projectDiv) {
   projectDiv.appendChild(projectLabel);
 
   listOfProjects.forEach(project => {
+    
     let projectInstances = document.createElement("div");
     projectInstances.classList.add("sidebar-elements", "project-instances");
     projectInstances.setAttribute('data-index', project.uniqueId);
@@ -120,7 +122,8 @@ function displayProjects(projectDiv) {
 
     // Add click event listener to each project instance
     projectInstances.addEventListener("click", (event) => {
-
+      addTodoButton.style.display = "block";
+  
       console.log("event fired hehe!");
 
       let uniqueIdOfProject = event.currentTarget.getAttribute("data-index");
@@ -129,7 +132,7 @@ function displayProjects(projectDiv) {
       console.log(uniqueIdOfProject);
 
 
-      currentProjectIndexForOperation = myProjects.findIndex(project => project.uniqueId == uniqueIdOfProject);
+      currentProjectIndexForOperation = myProjects.findIndex(project => project !== undefined && project.uniqueId == uniqueIdOfProject);
       console.log(currentProjectIndexForOperation);
       currentProjectIndexForOperation = myProjects[currentProjectIndexForOperation].currentProjectIdentifier();
 
@@ -149,11 +152,26 @@ function displayProjects(projectDiv) {
 
       let uniqueIdOfButtonDiv = button.parentElement.getAttribute("data-index");
       removeProjectFromArray(uniqueIdOfButtonDiv);
+
+      emptyDivFillerDom();
     });
   });
 }
 
 
+
+function emptyDivFillerDom() {
+  currentProjectHeading.textContent = "WOW , SUCH EMPTYYYYYYYYYYY?";
+  todosContainerHolder.innerHTML = "";
+
+  const todoListHigherImage = document.createElement("img");
+  todoListHigherImage.classList.add("todo-list-higher-image");
+  todoListHigherImage.src = todoListHigherImg;
+
+  todosContainerHolder.append(todoListHigherImage);
+  addTodoButton.style.display = "none";
+  
+}
 
 
 function displayElementsInContent(currentProjectIndex) {
@@ -228,6 +246,7 @@ function displayElementsInContent(currentProjectIndex) {
 
         // for logic
         let currentTodoDataIndex = event.target.parentElement.parentElement.getAttribute('data-index');
+        
         let currentTodoIndex = myProjects[currentProjectIndex].todos.findIndex(todo => todo !== undefined && todo.uniqueId == currentTodoDataIndex);
 
 
@@ -360,9 +379,9 @@ function updateCurrentProjectHeading(currentProjectHeading, projectInstanceText)
 }
 
 function removeProjectFromArray(uniqueIdOfButtonDiv) {
-  let indexToDelete = myProjects.findIndex(project => project.uniqueId == uniqueIdOfButtonDiv);
+  let indexToDelete = myProjects.findIndex(project => project !== undefined && project.uniqueId == uniqueIdOfButtonDiv);
 
-  myProjects[indexToDelete].deleteProject();
+  delete myProjects[indexToDelete]
   console.log(myProjects);
 }
 
