@@ -43,10 +43,11 @@ class Todo {
         console.log(this);
     }
 
-    editTodo(newTitle, newDueDate, newPriority) {
+    editTodo(newTitle, newDueDate, newCompleted) {
         this.title = newTitle;
         this.dueDate = newDueDate;
-        this.priority = newPriority;
+        this.completed = newCompleted;
+        
     }
 
     deleteTodo() {
@@ -101,7 +102,6 @@ class Project {
 }
 
 
-
 function onTodoDialogSaveButtonClick() {
     let textInputTodoTitleValue = document.querySelector("#text-input-todo-title").value;
     let textInputTodoDescriptionValue = document.querySelector("#text-input-todo-description").value;
@@ -112,6 +112,7 @@ function onTodoDialogSaveButtonClick() {
 
     newTodo.pushTodoToArray();
 }
+
 
 
 
@@ -200,14 +201,6 @@ document.addEventListener("DOMContentLoaded", () => {
     displayElementsInContent(0);
    
 });
-
-
-
-
-
-
-
-
 
 
 

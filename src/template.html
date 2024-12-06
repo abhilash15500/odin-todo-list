@@ -108,7 +108,7 @@
                         <img src="./images/delete-svg.svg" class="todo-buttons" id="todo-delete-button">
                     </div>
                 </div>
-            </div> 
+            </div>
 
 
 
@@ -129,21 +129,21 @@
         </dialog>
 
 
-        
+
         <dialog id="todo-add-dialog">
             <form action="">
                 <div>
-                    <label for="todo-title">Todo Title?</label>
-                    <input type="text" required id="text-input-todo-title">
+                    <label for="text-input-todo-title">Todo Title?</label>
+                    <input type="text" required id="text-input-todo-title" >
                 </div>
 
                 <div>
-                    <label for="todo-description">Todo description?</label>
+                    <label for="text-input-todo-description">Todo description?</label>
                     <input type="text" required id="text-input-todo-description">
                 </div>
-                
+
                 <div>
-                    <label for="todo-due-date">Todo due date?</label>
+                    <label for="text-input-todo-due-date">Todo due date?</label>
                     <input type="date" required id="text-input-todo-due-date">
                 </div>
 
@@ -155,7 +155,6 @@
                         <option value="low">Low</option>
                     </select>
                 </div>
-                
 
                 <div>
                     <button id="todo-add-cancel-button" type="button">Cancel</button>
@@ -164,6 +163,27 @@
             </form>
         </dialog>
     </div>
+
+
+    <dialog id="todo-edit-dialog">
+        <form action="">
+            <div>
+                <label for="text-edit-input-todo-title">Todo Title?</label>
+                <input type="text" required id="text-edit-input-todo-title">
+            </div>
+
+            <div>
+                <label for="text-edit-input-todo-due-date">Todo due date?</label>
+                <input type="date" required id="text-edit-input-todo-due-date">
+            </div>
+
+            <div>
+                <button id="todo-edit-cancel-button" type="button">Cancel</button>
+                <button id="todo-edit-save-button" type="button">Save</button>
+            </div>
+
+        </form>
+    </dialog>
 
 
 </body>
