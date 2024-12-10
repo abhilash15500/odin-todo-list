@@ -1,10 +1,15 @@
 * {
-  margin: 0;
+  /* margin: 0; */
   padding: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
   color: white;
   font-weight: 400;
+}
+
+
+*:not(dialog) {
+  margin: 0;
 }
 
 #main-container {
@@ -200,10 +205,9 @@ cursor: pointer;
 
 
 #project-add-dialog {
-  top: 40vh;
-  left: 40vw;
+ 
   background-color: #1e1e1e;
-  padding: 10px;
+  padding: 30px;
   
 };
 

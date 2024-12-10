@@ -96,6 +96,20 @@ class Project {
 }
 
 
+function saveToLocalStorage() {
+        localStorage.setItem("myProjectsLocalStorageArray",JSON.stringify(myProjects));
+};
+
+function retrieveFromLocalStorage() {
+   return JSON.parse(localStorage.getItem("myProjectsLocalStorageArray"));
+};
+
+
+
+
+
+
+
 function onTodoDialogSaveButtonClick() {
     let textInputTodoTitleValue = document.querySelector("#text-input-todo-title").value;
     let textInputTodoDescriptionValue = document.querySelector("#text-input-todo-description").value;
@@ -112,36 +126,40 @@ function onTodoDialogSaveButtonClick() {
 
 // INITIALIZATION OF THE APP
 // This is to initialize the default project
-let defaultProject = new Project("Default Project");
+let defaultProject = new Project("Web development");
 defaultProject.pushProjectToArray();
 
 // Testing console version
-let anotherNewProject = new Project("idk");
+let anotherNewProject = new Project("Health 100");
 anotherNewProject.pushProjectToArray();
 anotherNewProject.currentProjectIdentifier();
 
 // Creating initial todos for the default project
 const todo1 = new Todo(
-    "Finish Homework",
-    "Complete the math homework",
-    "2024-10-30",
-    "High",
-    false
-);
-const todo2 = new Todo(
-    "Grocery Shopping",
-    "Buy fruits and vegetables",
-    "2024-11-01",
+    "Take a Morning Walk",
+    "Go for a 20-minute walk in the morning to stay active.",
+    "2024-12-08",
     "Medium",
     false
 );
-const todo3 = new Todo(
-    "Learn Webpack",
-    "Study asset bundling and loaders",
-    "2024-11-15",
-    "High",
+
+const todo2 = new Todo(
+    "Plan Healthy Meals",
+    "Write down a meal plan with balanced nutrients for the next three days.",
+    "2024-12-09",
+    "Low",
     false
 );
+
+const todo3 = new Todo(
+    "Do a Stretching Routine",
+    "Follow a 15-minute beginner stretching routine to relieve muscle tension.",
+    "2024-12-10",
+    "Medium",
+    false
+);
+
+
 
 // Add todos to the default project (index 0)
 todo1.pushTodoToArray();
@@ -150,33 +168,37 @@ todo3.pushTodoToArray();
 
 // Adding more todos
 const todo4 = new Todo(
-    "Read JavaScript Book",
-    "Complete the chapter on ES6 features",
-    "2024-12-01",
-    "Medium",
-    true,
+    "Create a Simple Web Page",
+    "Build a webpage with a header, paragraph, image, and a styled button.",
+    "2024-12-11",
+    "High",
+    false
 );
+
 const todo5 = new Todo(
-    "Prepare for Interview",
-    "Review algorithms and data structures",
-    "2024-11-20",
-    "High",
-    true,
+    "Learn CSS Flexbox",
+    "Practice aligning elements using Flexbox properties like `justify-content` and `align-items`.",
+    "2024-12-12",
+    "Medium",
+    false
 );
+
 const todo6 = new Todo(
-    "Clean the House",
-    "Organize the living room and kitchen",
-    "2024-11-05",
-    "Low",
-    false
-);
-const todo7 = new Todo(
-    "Complete Web Project",
-    "Finish the portfolio website",
-    "2024-11-10",
+    "Add Interactivity with JavaScript",
+    "Create a webpage where clicking a button changes the background color.",
+    "2024-12-13",
     "High",
     false
 );
+
+const todo7 = new Todo(
+    "Build a Responsive Navigation Bar",
+    "Design a mobile-friendly navigation bar with a dropdown menu using HTML, CSS, and media queries.",
+    "2024-12-15",
+    "High",
+    false
+);
+
 
 defaultProject.currentProjectIdentifier();
 // Add new todos to the default project (index 0)
@@ -196,7 +218,9 @@ document.addEventListener("DOMContentLoaded", () => {
    
 });
 
+saveToLocalStorage();
+retrieveFromLocalStorage();
 
 
 
-export { Project, myProjects, projectDiv,onTodoDialogSaveButtonClick};
+export { Project, myProjects, projectDiv,onTodoDialogSaveButtonClick ,saveToLocalStorage,retrieveFromLocalStorage};
