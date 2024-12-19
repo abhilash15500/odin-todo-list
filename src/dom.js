@@ -1,8 +1,8 @@
-import { Project, myProjects, onTodoDialogSaveButtonClick, projectDiv } from "./index.js";
+import { Project, myProjects, onTodoDialogSaveButtonClick, projectDiv , saveToLocalStorage,retrieveFromLocalStorage} from "./index.js";
 import deleteIcon from './images/delete-svg.svg';
 import calendarIcon from './images/calender.svg';
 import editIcon from './images/edit-svg.svg';
-import todoListHigherImg from "./images/todolisthigher.png";
+
 
 const projectAddDialog = document.querySelector("#project-add-dialog");
 const addProjectButton = document.querySelector("#add-project-div");
@@ -28,16 +28,16 @@ let textEditInputTodoDueDate = document.querySelector("#text-edit-input-todo-due
 let currentTodoIndex;
 
 
-addTodoButton.addEventListener("click", () => {
-  console.log("hiiiiiiii");
-  todoAddDialog.showModal();
 
+addTodoButton.addEventListener("click", () => {
+  todoAddDialog.showModal();
 });
 
 
 todoAddDialogCancelButton.addEventListener("click", () => {
   todoAddDialog.close();
-})
+});
+
 
 todoAddDialogSaveButton.addEventListener("click", () => {
   onTodoDialogSaveButtonClick();
@@ -48,10 +48,12 @@ todoAddDialogSaveButton.addEventListener("click", () => {
   if (currentProjectIndexForOperation == undefined) {
     currentProjectIndexForOperation = 0;
   }
+
+  saveToLocalStorage();
   displayElementsInContent(currentProjectIndexForOperation);
 
+});
 
-})
 
 
 todoEditSaveButton.addEventListener("click", () => {
@@ -69,7 +71,7 @@ if(currentProjectIndexForOperation == undefined) {
   myProjects[currentProjectIndexForOperation].todos[currentTodoIndex].editTodo(titleValue,dueDateValue,false);
   console.log(myProjects);
 
-
+  saveToLocalStorage();
   displayElementsInContent(currentProjectIndexForOperation);
 });
 
@@ -79,8 +81,11 @@ todoEditCancelButton.addEventListener("click", () => {
   todoEditDialog.close();
 });
 
+
+
 function displayProjects(projectDiv) {
   projectDiv.innerHTML = "";
+
   let listOfProjects = Project.viewAllProjects();
 
   let projectLabel = document.createElement("p");
@@ -163,14 +168,7 @@ function displayProjects(projectDiv) {
 function emptyDivFillerDom() {
   currentProjectHeading.textContent = "WOW , SUCH EMPTYYYYYYYYYYY?";
   todosContainerHolder.innerHTML = "";
-
-  const todoListHigherImage = document.createElement("img");
-  todoListHigherImage.classList.add("todo-list-higher-image");
-  todoListHigherImage.src = todoListHigherImg;
-
-  todosContainerHolder.append(todoListHigherImage);
   addTodoButton.style.display = "none";
-  
 }
 
 
@@ -253,7 +251,7 @@ function displayElementsInContent(currentProjectIndex) {
 
         delete myProjects[currentProjectIndex].todos[currentTodoIndex];
         console.log(myProjects);
-
+        saveToLocalStorage();
 
       });
 
@@ -345,7 +343,7 @@ function displayElementsInContent(currentProjectIndex) {
         let currentTodoIndex = myProjects[currentProjectIndex].todos.findIndex(todo => todo !== undefined && todo.uniqueId == currentTodoDataIndex);
         delete myProjects[currentProjectIndex].todos[currentTodoIndex];
         console.log(myProjects);
-
+        saveToLocalStorage();
       });
 
       let todoCheckBoxTitleDiv = document.createElement("div");
@@ -383,6 +381,7 @@ function removeProjectFromArray(uniqueIdOfButtonDiv) {
 
   delete myProjects[indexToDelete]
   console.log(myProjects);
+  saveToLocalStorage();
 }
 
 function removeProjectDiv(button) {
@@ -417,7 +416,7 @@ projectAddSaveButton.addEventListener("click", () => {
   closeProjectAddDialog();
 
   console.log(myProjects);
-
+  saveToLocalStorage();
   displayProjects(projectDiv);
 });
 
