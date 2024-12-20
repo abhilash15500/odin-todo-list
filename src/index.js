@@ -96,6 +96,8 @@ class Project {
 }
 
 
+
+
 function saveToLocalStorage() {
         localStorage.setItem("myProjectsLocalStorageArray",JSON.stringify(myProjects));
 };
@@ -107,7 +109,13 @@ function retrieveFromLocalStorage() {
 
 
 
-
+function createNewProject(textInputProjectTitle) {
+    
+    let newProject = new Project(textInputProjectTitle.value);
+      newProject.pushProjectToArray();
+      console.log(myProjects);
+      
+};
 
 
 function onTodoDialogSaveButtonClick() {
@@ -121,6 +129,90 @@ function onTodoDialogSaveButtonClick() {
     newTodo.pushTodoToArray();
 }
 
+
+
+
+//logic 
+
+
+function ifCurrentProjectIndexForOperationIsUndefined(currentProjectIndexForOperation) {
+   if (currentProjectIndexForOperation == undefined) {
+     
+     return 0;
+  }};
+
+
+function editCurrentTodo(currentProjectIndexForOperation,currentTodoIndex,titleValue,dueDateValue) {
+     
+    myProjects[currentProjectIndexForOperation].todos[currentTodoIndex].editTodo(titleValue,dueDateValue,false);
+}
+
+function getCurrentTodoIndex(currentProjectIndex,clickedTodoDatasetIndexNumber,event) {
+
+            currentTodoIndex = myProjects[currentProjectIndex].todos.findIndex(todo => todo !== undefined && todo.uniqueId == clickedTodoDatasetIndexNumber);
+            return currentTodoIndex;
+};
+
+
+function addProjectLabelToDom() {
+    let projectLabel = document.createElement("p");
+  projectLabel.setAttribute("id", "project-label");
+  projectLabel.textContent = "Projects";
+  projectDiv.appendChild(projectLabel);
+};
+
+
+
+function getCurrentProjectIndexForOperation(uniqueIdOfProject,currentProjectIndexForOperation) {
+    currentProjectIndexForOperation = myProjects.findIndex(project => project !== undefined && project.uniqueId == uniqueIdOfProject);
+    console.log(currentProjectIndexForOperation);
+    currentProjectIndexForOperation = myProjects[currentProjectIndexForOperation].currentProjectIdentifier();
+    return currentProjectIndexForOperation;
+};
+
+function getCurrentProjectTodos(currentProjectIndex) {
+    return myProjects[currentProjectIndex].todos;
+};
+
+
+
+function markCurrentTodoAsIncomplete(event,currentProjectIndex,currentTodoIndex) {
+    let clickedTodoDatasetIndexNumber = event.target.parentElement.parentElement.getAttribute('data-index');
+    currentTodoIndex = myProjects[currentProjectIndex].todos.findIndex(todo => todo !== undefined && todo.uniqueId == clickedTodoDatasetIndexNumber);
+    myProjects[currentProjectIndex].todos[currentTodoIndex].markTodoAsIncomplete();
+    console.log(myProjects);
+};
+
+
+function markCurrentTodoAsComplete(event,currentProjectIndex,currentTodoIndex){
+    let clickedTodoDatasetIndexNumber = event.target.parentElement.parentElement.getAttribute('data-index');
+        
+        currentTodoIndex = myProjects[currentProjectIndex].todos.findIndex(todo => todo !== undefined && todo.uniqueId == clickedTodoDatasetIndexNumber);
+
+        myProjects[currentProjectIndex].todos[currentTodoIndex].markTodoAsComplete();
+        console.log(myProjects);
+};
+
+
+
+
+function deleteATodo(currentTodoDataIndex) {
+
+            let currentTodoIndex = myProjects[currentProjectIndex].todos.findIndex(todo => todo !== undefined && todo.uniqueId == currentTodoDataIndex);
+    
+
+            delete myProjects[currentProjectIndex].todos[currentTodoIndex];
+            console.log(myProjects);
+};
+
+
+function removeProjectFromArray(uniqueIdOfButtonDiv) {
+    let indexToDelete = myProjects.findIndex(project => project !== undefined && project.uniqueId == uniqueIdOfButtonDiv);
+  
+    delete myProjects[indexToDelete]
+    console.log(myProjects);
+    saveToLocalStorage();
+  }
 
 
 
@@ -190,4 +282,4 @@ retrieveFromLocalStorage();
 
 
 
-export { Project, myProjects, projectDiv,onTodoDialogSaveButtonClick ,saveToLocalStorage,retrieveFromLocalStorage};
+export { Project, myProjects, projectDiv,onTodoDialogSaveButtonClick ,saveToLocalStorage,retrieveFromLocalStorage,ifCurrentProjectIndexForOperationIsUndefined,editCurrentTodo,addProjectLabelToDom,getCurrentProjectIndexForOperation,getCurrentProjectTodos,markCurrentTodoAsIncomplete,markCurrentTodoAsComplete,getCurrentTodoIndex,deleteATodo,removeProjectFromArray,createNewProject};
