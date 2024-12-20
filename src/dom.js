@@ -1,4 +1,4 @@
-import { Project, myProjects, onTodoDialogSaveButtonClick, projectDiv, saveToLocalStorage, retrieveFromLocalStorage, ifCurrentProjectIndexForOperationIsUndefined, editCurrentTodo, addProjectLabelToDom, getCurrentProjectIndexForOperation ,getCurrentProjectTodos,markCurrentTodoAsIncomplete,markCurrentTodoAsComplete,getCurrentTodoIndex,currentTodoDataIndex, deleteATodo,removeProjectFromArray,createNewProject} from "./index.js";
+import { Project, myProjects, onTodoDialogSaveButtonClick, projectDiv, saveToLocalStorage, retrieveFromLocalStorage, ifCurrentProjectIndexForOperationIsUndefined, editCurrentTodo, addProjectLabelToDom, getCurrentProjectIndexForOperation ,getCurrentProjectTodos,markCurrentTodoAsIncomplete,markCurrentTodoAsComplete,getCurrentTodoIndex,currentTodoDataIndex, deleteATodo,removeProjectFromArray,createNewProject,currentTodoIndex} from "./index.js";
 import deleteIcon from './images/delete-svg.svg';
 import calendarIcon from './images/calender.svg';
 import editIcon from './images/edit-svg.svg';
@@ -23,7 +23,7 @@ let todoEditSaveButton = document.querySelector("#todo-edit-save-button");
 let todoEditCancelButton = document.querySelector("#todo-edit-cancel-button");
 let textEditInputTodoTitle = document.querySelector("#text-edit-input-todo-title");
 let textEditInputTodoDueDate = document.querySelector("#text-edit-input-todo-due-date");
-let currentTodoIndex;
+// let currentTodoIndex;
 
 
 
