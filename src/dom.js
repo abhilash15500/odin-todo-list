@@ -3,6 +3,9 @@ import deleteIcon from './images/delete-svg.svg';
 import calendarIcon from './images/calender.svg';
 import editIcon from './images/edit-svg.svg';
 
+import { helperFunction } from "./helperFunctions.js";
+import { unique } from "webpack-merge";
+
 
 
 const addProjectButton = document.querySelector("#add-project-div");
@@ -23,7 +26,7 @@ let todoEditSaveButton = document.querySelector("#todo-edit-save-button");
 let todoEditCancelButton = document.querySelector("#todo-edit-cancel-button");
 let textEditInputTodoTitle = document.querySelector("#text-edit-input-todo-title");
 let textEditInputTodoDueDate = document.querySelector("#text-edit-input-todo-due-date");
-// let currentTodoIndex;
+
 
 
 
@@ -83,6 +86,9 @@ function displayProjects(projectDiv) {
   addProjectLabelToDom();
 
   listOfProjects.forEach(project => {
+    // let projectInstances = helperFunction('div',['sidebar-elements','project-instances'],'',{ 'data-index': project.uniqueId });
+ 
+
     let projectInstances = document.createElement("div");
     projectInstances.classList.add("sidebar-elements", "project-instances");
     projectInstances.setAttribute('data-index', project.uniqueId);
