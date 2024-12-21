@@ -1,5 +1,5 @@
 function helperFunction(tag, classes = [], textContent, src, attributes = {}) {
-
+    
     const element = document.createElement(tag);
 
     classes.forEach(classInstance => {
