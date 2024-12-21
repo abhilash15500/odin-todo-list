@@ -103,7 +103,7 @@ function saveToLocalStorage() {
 };
 
 function retrieveFromLocalStorage() {
-    JSON.parse(localStorage.getItem("myProjectsLocalStorageArray"));
+    return JSON.parse(localStorage.getItem("myProjectsLocalStorageArray"));
 };
 
 
@@ -281,5 +281,8 @@ document.addEventListener("DOMContentLoaded", () => {
 retrieveFromLocalStorage();
 
 
+// let localStorageArray = retrieveFromLocalStorage(); // this works
+
+ 
 
 export { Project, myProjects, projectDiv,onTodoDialogSaveButtonClick ,saveToLocalStorage,retrieveFromLocalStorage,ifCurrentProjectIndexForOperationIsUndefined,editCurrentTodo,addProjectLabelToDom,getCurrentProjectIndexForOperation,getCurrentProjectTodos,markCurrentTodoAsIncomplete,markCurrentTodoAsComplete,getCurrentTodoIndex,deleteATodo,removeProjectFromArray,createNewProject,currentTodoIndex};
