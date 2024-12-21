@@ -1,3 +1,7 @@
+:root {
+  --orangered: orangered;
+}
+
 * {
   /* margin: 0; */
   padding: 0;
@@ -6,7 +10,6 @@
   color: white;
   font-weight: 400;
 }
-
 
 *:not(dialog) {
   margin: 0;
@@ -22,7 +25,6 @@
 
 #sidebar {
   background-color: #282828;
-
 }
 
 #content {
@@ -43,22 +45,17 @@
   margin-bottom: calc(1rem + 15px);
 }
 
-
-
 #project-label {
   font-size: 15px;
   font-weight: 400 ;
   color: white;
   background-color: #afb3ac41;
   padding: 10px;
-  
   border-radius: 8px;
-
-  
 }
 
 .sidebar-elements {
-  margin:15px;
+  margin: 15px;
 }
 
 #add-project-div {
@@ -70,17 +67,14 @@
   cursor: pointer;
 }
 
-
-
 #add-project-button-text {
-  color: orangered;
+  color: var(--orangered);
   font-weight: 600;
 }
 
 #add-project-icon {
-  color: orangered;
+  color: var(--orangered);
 }
-
 
 .project-instances {
   display: flex;
@@ -89,7 +83,6 @@
   padding: 5px;
   border-radius: 8px;
   gap: 8px;
- 
 }
 
 .project-icon-text-div {
@@ -101,23 +94,19 @@
 .project-instances:hover {
   background-color: #4b4c4a;
   transition: 300ms;
-cursor: pointer;
+  cursor: pointer;
 }
 
 .project-instance-text {
   font-size: 15px;
-  
 }
 
-
 .orange-circle {
-  background-color: orangered;
+  background-color: var(--orangered);
   border-radius: 50%;
   height: 11px;
   width: 11px;
 }
-
-
 
 .content-elements {
   margin-left: 10vw;
@@ -125,7 +114,6 @@ cursor: pointer;
   gap: 40px;
   align-items: center;
 }
-
 
 .add-todos-button {
   margin-top: 4px;
@@ -135,21 +123,16 @@ cursor: pointer;
   font-weight: 800;
   font-size: 45px;
   margin-top: 50px;
-  color: orangered;
+  color: var(--orangered);
   margin-bottom: 55px;
- 
 }
-
-
 
 .todo-checkbox-title-div {
   display: flex;
   gap: 10px;
   align-items: center;
   width: 350px;
-  
 }
-
 
 .todos-container {
   display: flex;
@@ -162,7 +145,6 @@ cursor: pointer;
   margin-bottom: 25px;
 }
 
-
 .todo-buttons-div {
   display: flex;
   align-items: center;
@@ -173,9 +155,8 @@ cursor: pointer;
   cursor: pointer;
 }
 
-
 .todo-checkboxes {
-  border: 3px solid orangered;
+  border: 3px solid var(--orangered);
   border-radius: 50%;
   width: 22px;
   height: 22px;
@@ -183,13 +164,12 @@ cursor: pointer;
 }
 
 .todo-checkboxes-filled {
-  background-color: orangered;
+  background-color: var(--orangered);
 }
 
 .finished-todo {
   text-decoration: line-through;
 }
-
 
 .due-date-div {
   display: flex;
@@ -198,44 +178,35 @@ cursor: pointer;
   gap: 10px;
 }
 
-
 .due-date-text-striked {
   text-decoration: line-through;
 }
 
-
 #project-add-dialog {
- 
   background-color: #1e1e1e;
   padding: 30px;
-  
-};
+}
 
 #todo-add-dialog {
   top: 40vh;
   left: 40vw;
   background-color: #1e1e1e;
   padding: 10px;
-
 }
-
 
 .text-input {
   color: red;
 }
 
-
 .todo-list-higher-image {
   width: 65vw;
   height: 38vh;
   border-radius: 5px;
-
-  display: block; /* Ensures the image is treated as a block-level element */
+  display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 7vh;
 }
-
 
 /* Popup container */
 #project-select-pop-up-div {
@@ -247,18 +218,15 @@ cursor: pointer;
   top: 10px;
   padding: 20px;
   position: fixed;
-  
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  align-items:center;
-  
+  align-items: center;
   justify-content: space-between;
 }
 
-
 .close-btn {
   align-self: center;
-  background-color: orangered;
+  background-color: var(--orangered);
   color: white;
   border: none;
   padding: 8px 12px;
@@ -266,5 +234,4 @@ cursor: pointer;
   cursor: pointer;
   border-radius: 50%;
   align-self: flex-end;
-  /* margin-bottom: 10px; */
 }

@@ -95,7 +95,7 @@ class Project {
     }
 }
 
-
+// local storage!
 
 
 function saveToLocalStorage() {
@@ -225,7 +225,7 @@ defaultProject.pushProjectToArray();
 
 // Creating initial todos for the default project
 
-const todo4 = new Todo(
+const todo1 = new Todo(
     "Create a Simple Web Page",
     "Build a webpage with a header, paragraph, image, and a styled button.",
     "2024-12-11",
@@ -233,7 +233,7 @@ const todo4 = new Todo(
     false
 );
 
-const todo5 = new Todo(
+const todo2 = new Todo(
     "Learn CSS Flexbox",
     "Practice aligning elements using Flexbox properties like `justify-content` and `align-items`.",
     "2024-12-12",
@@ -241,7 +241,7 @@ const todo5 = new Todo(
     false
 );
 
-const todo6 = new Todo(
+const todo3 = new Todo(
     "Add Interactivity with JavaScript",
     "Create a webpage where clicking a button changes the background color.",
     "2024-12-13",
@@ -249,7 +249,7 @@ const todo6 = new Todo(
     false
 );
 
-const todo7 = new Todo(
+const todo4 = new Todo(
     "Build a Responsive Navigation Bar",
     "Design a mobile-friendly navigation bar with a dropdown menu using HTML, CSS, and media queries.",
     "2024-12-15",
@@ -260,10 +260,10 @@ const todo7 = new Todo(
 
 defaultProject.currentProjectIdentifier();
 // Add new todos to the default project (index 0)
+todo1.pushTodoToArray();
+todo2.pushTodoToArray();
+todo3.pushTodoToArray();
 todo4.pushTodoToArray();
-todo5.pushTodoToArray();
-todo6.pushTodoToArray();
-todo7.pushTodoToArray();
 
 // View all projects and display them
 console.log(Project.viewAllProjects());
