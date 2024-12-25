@@ -81,13 +81,15 @@ todoEditCancelButton.addEventListener("click", () => {
 });
 
 
+
 function displayProjects(projectDiv) {
-  projectDiv.innerHTML = "";
+  projectDiv.innerHTML = "";    
 
-  
 
+
+    
   let listOfProjects = Project.viewAllProjects();    //get list of projects
-
+ 
   addProjectLabelToDom();
 
   listOfProjects.forEach(project => {

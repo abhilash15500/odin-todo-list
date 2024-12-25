@@ -104,6 +104,7 @@ function saveToLocalStorage() {
 
 function retrieveFromLocalStorage() {
     return JSON.parse(localStorage.getItem("myProjectsLocalStorageArray"));
+    
 };
 
 
@@ -114,6 +115,7 @@ function createNewProject(textInputProjectTitle) {
     let newProject = new Project(textInputProjectTitle.value);
       newProject.pushProjectToArray();
       console.log(myProjects);
+      saveToLocalStorage();
       
 };
 
@@ -277,7 +279,7 @@ document.addEventListener("DOMContentLoaded", () => {
    
 });
 
-
+// saveToLocalStorage();
 retrieveFromLocalStorage();
 
 
