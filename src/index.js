@@ -2,10 +2,33 @@ import "./styles.css";
 import { displayProjects, displayElementsInContent } from "./dom.js";
 
 const projectDiv = document.querySelector("#project-div");
-const myProjects = []; // Array to store all the projects
+let  myProjects;
+
+let isLocalStorageNull = isLocalStorageNullChecker();
+if(isLocalStorageNull == true) {
+    myProjects = [];
+    saveToLocalStorage();
+}
+else if(isLocalStorageNull == false) {
+    myProjects = retrieveFromLocalStorage();
+};
+
+
+
 
 let currentProjectIndex;
 let currentTodoIndex;
+
+
+function isLocalStorageNullChecker() {
+    let data = retrieveFromLocalStorage();
+
+    if (data == null) {
+        return true; // Returns true if data is null
+    } else {
+        return false; // Returns false if data exists
+    }
+}
 
 // Constructors for todos and projects
 class Todo {
@@ -87,12 +110,23 @@ class Project {
         });
     }
 
+    // static viewAllProjects() {
+    //     return myProjects.map((project) => ({
+    //         title: project.title,
+    //         uniqueId: project.uniqueId,
+    //     }));
+    // }
+
+
     static viewAllProjects() {
-        return myProjects.map((project) => ({
-            title: project.title,
-            uniqueId: project.uniqueId,
-        }));
+        return myProjects
+            .filter(project => project !== null && project !== undefined) // Filter out null and undefined values
+            .map((project) => ({
+                title: project.title,
+                uniqueId: project.uniqueId,
+            }));
     }
+    
 }
 
 // local storage!
@@ -103,7 +137,10 @@ function saveToLocalStorage() {
 };
 
 function retrieveFromLocalStorage() {
-    return JSON.parse(localStorage.getItem("myProjectsLocalStorageArray"));
+    let storedData = JSON.parse(localStorage.getItem("myProjectsLocalStorageArray"));
+    // console.log(`im from ret lc   and this is  ${storedData[0].title}`);
+    console.log(storedData);
+    return storedData;
     
 };
 
@@ -166,7 +203,7 @@ function addProjectLabelToDom() {
 
 
 function getCurrentProjectIndexForOperation(uniqueIdOfProject,currentProjectIndexForOperation) {
-    currentProjectIndexForOperation = myProjects.findIndex(project => project !== undefined && project.uniqueId == uniqueIdOfProject);
+    currentProjectIndexForOperation = myProjects.findIndex(project => project !== undefined && project!== null && project.uniqueId == uniqueIdOfProject);
     console.log(currentProjectIndexForOperation);
     currentProjectIndexForOperation = myProjects[currentProjectIndexForOperation].currentProjectIdentifier();
     return currentProjectIndexForOperation;
@@ -217,7 +254,9 @@ function removeProjectFromArray(uniqueIdOfButtonDiv) {
   }
 
 
-
+let retrievedStoredProjects = retrieveFromLocalStorage();
+if(retrievedStoredProjects.length < 1) {
+    
 // INITIALIZATION OF THE APP
 // This is to initialize the default project
 let defaultProject = new Project("Default Project");
@@ -266,6 +305,10 @@ todo1.pushTodoToArray();
 todo2.pushTodoToArray();
 todo3.pushTodoToArray();
 todo4.pushTodoToArray();
+saveToLocalStorage();
+}
+
+
 
 // View all projects and display them
 console.log(Project.viewAllProjects());
