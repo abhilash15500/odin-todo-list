@@ -308,7 +308,7 @@ projectAddCancelButton.addEventListener("click", () => {
 projectAddSaveButton.addEventListener("click", () => {
   createNewProject(textInputProjectTitle);
   closeProjectAddDialog();
-  saveToLocalStorage();
+  
   displayProjects(projectDiv);
 });
 
