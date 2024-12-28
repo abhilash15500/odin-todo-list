@@ -100,7 +100,11 @@ class Project {
 
 // varaibles 
 const projectDiv = document.querySelector("#project-div");
-let  myProjects;
+let myProjects = [];
+
+
+let currentProjectIndex;
+let currentTodoIndex;
 
 let isLocalStorageNull = isLocalStorageNullChecker();
 if(isLocalStorageNull == true) {
@@ -111,9 +115,6 @@ else if(isLocalStorageNull == false) {
     myProjects = retrieveFromLocalStorage();
 };
 
-
-let currentProjectIndex;
-let currentTodoIndex;
 
 
 function isLocalStorageNullChecker() {
@@ -174,17 +175,14 @@ function onTodoDialogSaveButtonClick() {
     let textInputTodoDescriptionValue = document.querySelector("#text-input-todo-description").value;
     let textInputTodoDueDateValue = document.querySelector("#text-input-todo-due-date").value;
     let textInputTodoPriorityValue = document.querySelector("#todo-priority").value;
-
     let newTodo = new Todo(textInputTodoTitleValue,textInputTodoDescriptionValue,textInputTodoDueDateValue,textInputTodoPriorityValue);
-
     newTodo.pushTodoToArray();
-}
+};
 
 
 
 function ifCurrentProjectIndexForOperationIsUndefined(currentProjectIndexForOperation) {
    if (currentProjectIndexForOperation == undefined) {
-     
      return 0;
   }};
 
