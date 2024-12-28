@@ -98,7 +98,6 @@ class Project {
     
 }
 
-
 // varaibles 
 const projectDiv = document.querySelector("#project-div");
 let  myProjects;
@@ -115,7 +114,6 @@ else if(isLocalStorageNull == false) {
 
 let currentProjectIndex;
 let currentTodoIndex;
-
 
 
 function isLocalStorageNullChecker() {
@@ -139,13 +137,11 @@ function saveToLocalStorage() {
 
 
 function retrieveFromLocalStorage() {
-    
     let storedData = JSON.parse(localStorage.getItem("myProjectsLocalStorageArray"));
+    
     if (storedData) {
-        
         storedData.forEach(project => {
             let newProject = new Project(project.title, project.todos, project.uniqueId);
-          
             newProject.currentProjectIdentifier();
             newProject.pushProjectToArray();
            
@@ -154,9 +150,6 @@ function retrieveFromLocalStorage() {
                 let newTodo = new Todo(todo.title, todo.description, todo.dueDate, todo.priority, todo.completed, todo.uniqueId);
                 newTodo.pushTodoToArray();
             });
-
-
-            saveToLocalStorage();
         });
     }
   
