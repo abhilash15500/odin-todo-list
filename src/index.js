@@ -1,34 +1,7 @@
 import "./styles.css";
 import { displayProjects, displayElementsInContent } from "./dom.js";
 
-const projectDiv = document.querySelector("#project-div");
-let  myProjects;
 
-let isLocalStorageNull = isLocalStorageNullChecker();
-if(isLocalStorageNull == true) {
-    myProjects = [];
-    saveToLocalStorage();
-}
-else if(isLocalStorageNull == false) {
-    myProjects = retrieveFromLocalStorage();
-};
-
-
-
-
-let currentProjectIndex;
-let currentTodoIndex;
-
-
-function isLocalStorageNullChecker() {
-    let data = retrieveFromLocalStorage();
-
-    if (data == null) {
-        return true; // Returns true if data is null
-    } else {
-        return false; // Returns false if data exists
-    }
-}
 
 // Constructors for todos and projects
 class Todo {
@@ -113,13 +86,6 @@ class Project {
         });
     }
 
-    // static viewAllProjects() {
-    //     return myProjects.map((project) => ({
-    //         title: project.title,
-    //         uniqueId: project.uniqueId,
-    //     }));
-    // }
-
 
     static viewAllProjects() {
         return myProjects
@@ -132,6 +98,37 @@ class Project {
     
 }
 
+
+// varaibles 
+const projectDiv = document.querySelector("#project-div");
+let  myProjects;
+
+let isLocalStorageNull = isLocalStorageNullChecker();
+if(isLocalStorageNull == true) {
+    myProjects = [];
+    saveToLocalStorage();
+}
+else if(isLocalStorageNull == false) {
+    myProjects = retrieveFromLocalStorage();
+};
+
+
+let currentProjectIndex;
+let currentTodoIndex;
+
+
+
+function isLocalStorageNullChecker() {
+    let data = retrieveFromLocalStorage();
+
+    if (data == null) {
+        return true; // Returns true if data is null
+    } else {
+        return false; // Returns false if data exists
+    }
+}
+
+
 // local storage!
 
 
@@ -142,20 +139,23 @@ function saveToLocalStorage() {
 
 
 function retrieveFromLocalStorage() {
-    let storedData = JSON.parse(localStorage.getItem("myProjectsLocalStorageArray"));
     
+    let storedData = JSON.parse(localStorage.getItem("myProjectsLocalStorageArray"));
     if (storedData) {
+        
         storedData.forEach(project => {
             let newProject = new Project(project.title, project.todos, project.uniqueId);
-            newProject.pushProjectToArray();
+          
             newProject.currentProjectIdentifier();
+            newProject.pushProjectToArray();
+           
             
             project.todos.forEach(todo => {
                 let newTodo = new Todo(todo.title, todo.description, todo.dueDate, todo.priority, todo.completed, todo.uniqueId);
                 newTodo.pushTodoToArray();
             });
 
-            // Save the current state back to localStorage
+
             saveToLocalStorage();
         });
     }
@@ -165,7 +165,7 @@ function retrieveFromLocalStorage() {
 
 
 
-
+//utility functions 
 function createNewProject(textInputProjectTitle) {
     
     let newProject = new Project(textInputProjectTitle.value);
@@ -187,10 +187,6 @@ function onTodoDialogSaveButtonClick() {
     newTodo.pushTodoToArray();
 }
 
-
-
-
-//logic 
 
 
 function ifCurrentProjectIndexForOperationIsUndefined(currentProjectIndexForOperation) {
@@ -275,6 +271,8 @@ function removeProjectFromArray(uniqueIdOfButtonDiv) {
 
 let retrievedStoredProjects = retrieveFromLocalStorage();
 if(!retrievedStoredProjects.some(project => project.title == "Default project")) {
+
+
     
 // INITIALIZATION OF THE APP
 // This is to initialize the default project
@@ -335,17 +333,10 @@ console.log(Project.viewAllProjects());
 
 // Display projects
 document.addEventListener("DOMContentLoaded", () => {
-    console.log(Project.viewAllProjects());
     displayProjects(projectDiv);
     displayElementsInContent(0);
    
 });
-
-// saveToLocalStorage();
-// 
-
-
-// let localStorageArray = retrieveFromLocalStorage(); // this works
 
  
 
