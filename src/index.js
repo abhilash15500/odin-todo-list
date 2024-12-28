@@ -43,11 +43,13 @@ class Todo {
 
     markTodoAsComplete() {
         this.completed = true;
+        saveToLocalStorage();
     }
 
 
     markTodoAsIncomplete() {
         this.completed = false;
+        saveToLocalStorage();
     }
 
     changeTodoPriority(priority) {
@@ -70,6 +72,7 @@ class Todo {
         this.title = newTitle;
         this.dueDate = newDueDate;
         this.completed = newCompleted;
+        saveToLocalStorage();
         
     }
 
@@ -136,13 +139,29 @@ function saveToLocalStorage() {
         localStorage.setItem("myProjectsLocalStorageArray",JSON.stringify(myProjects));
 };
 
+
+
 function retrieveFromLocalStorage() {
     let storedData = JSON.parse(localStorage.getItem("myProjectsLocalStorageArray"));
-    // console.log(`im from ret lc   and this is  ${storedData[0].title}`);
-    console.log(storedData);
-    return storedData;
     
-};
+    if (storedData) {
+        storedData.forEach(project => {
+            let newProject = new Project(project.title, project.todos, project.uniqueId);
+            newProject.pushProjectToArray();
+            newProject.currentProjectIdentifier();
+            
+            project.todos.forEach(todo => {
+                let newTodo = new Todo(todo.title, todo.description, todo.dueDate, todo.priority, todo.completed, todo.uniqueId);
+                newTodo.pushTodoToArray();
+            });
+
+            // Save the current state back to localStorage
+            saveToLocalStorage();
+        });
+    }
+  
+    return storedData;
+}
 
 
 
@@ -255,7 +274,7 @@ function removeProjectFromArray(uniqueIdOfButtonDiv) {
 
 
 let retrievedStoredProjects = retrieveFromLocalStorage();
-if(retrievedStoredProjects.length < 1) {
+if(!retrievedStoredProjects.some(project => project.title == "Default project")) {
     
 // INITIALIZATION OF THE APP
 // This is to initialize the default project
@@ -323,7 +342,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // saveToLocalStorage();
-retrieveFromLocalStorage();
+// 
 
 
 // let localStorageArray = retrieveFromLocalStorage(); // this works

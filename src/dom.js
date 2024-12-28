@@ -84,10 +84,6 @@ todoEditCancelButton.addEventListener("click", () => {
 
 function displayProjects(projectDiv) {
   projectDiv.innerHTML = "";    
-
-
-
-    
   let listOfProjects = Project.viewAllProjects();    //get list of projects
  
   addProjectLabelToDom();
