@@ -1,6 +1,5 @@
 import "./styles.css";
-import { displayProjects, displayElementsInContent } from "./dom.js";
-
+import { renderProjects, renderTodos } from "./dom.js";
 
 
 // Constructors for todos and projects
@@ -57,6 +56,8 @@ class Todo {
         delete myProjects[currentProjectIndex].todos[currentTodoIndex];
     }
 }
+
+
 
 class Project {
     constructor(title, todos = [], uniqueId) {
@@ -137,6 +138,16 @@ function saveToLocalStorage() {
 };
 
 
+function setCurrentProjectIndexToLocalStorage(currentProjectIndex) {
+        localStorage.setItem("currentProjectIndex", currentProjectIndex);
+};
+
+function retrieveCurrentProjectIndex() {
+    let storedIndex = localStorage.getItem("currentProjectIndex");
+    return storedIndex;
+}
+
+
 
 
 function retrieveFromLocalStorage() {
@@ -146,15 +157,14 @@ function retrieveFromLocalStorage() {
 
     if (storedData) {
         // Filter out invalid projects (e.g., those with null titles).
-        storedData = storedData.filter(project => project.title !== null);
+        storedData = storedData.filter(project => project !== null);
 
         storedData.forEach(project => {
             let newProject = new Project(project.title, [], project.uniqueId);
             newProject.currentProjectIdentifier();
-            newProject.pushProjectToArray();
-
+           
                       
-                project.todos.forEach(todo => {
+            project.todos.filter(todo => todo !== null && todo !== undefined).forEach(todo => {
                     let newTodo = new Todo(
                         todo.title,
                         todo.description,
@@ -163,8 +173,9 @@ function retrieveFromLocalStorage() {
                         todo.completed,
                         todo.uniqueId
                     );
-                    newTodo.pushTodoToArray();
+                    newProject.todos.push(newTodo)
                 });
+                newProject.pushProjectToArray();
             }
         );
     }
@@ -257,10 +268,11 @@ function markCurrentTodoAsComplete(event,currentProjectIndex,currentTodoIndex){
 
 
 function deleteATodo(currentTodoDataIndex) {
+    currentProjectIndex = retrieveCurrentProjectIndex();
+   
 
             let currentTodoIndex = myProjects[currentProjectIndex].todos.findIndex(todo => todo !== undefined && todo.uniqueId == currentTodoDataIndex);
     
-
             delete myProjects[currentProjectIndex].todos[currentTodoIndex];
             console.log(myProjects);
 };
@@ -275,16 +287,21 @@ function removeProjectFromArray(uniqueIdOfButtonDiv) {
   }
 
 
-let retrievedStoredProjects = retrieveFromLocalStorage();
+  function displayFirstProject() {
+    renderTodos(0);
+  };
 
+
+// INITIALIZATION OF THE APP
+// INITIALIZATION OF THE APP
+// INITIALIZATION OF THE APP
+
+let retrievedStoredProjects = retrieveFromLocalStorage();
 if(retrievedStoredProjects.some(project => project.title === "Default Project") == false) {
     
-// INITIALIZATION OF THE APP
 // This is to initialize the default project
 let defaultProject = new Project("Default Project");
 defaultProject.pushProjectToArray();
-
-
 
 // Creating initial todos for the default project
 
@@ -328,9 +345,7 @@ todo2.pushTodoToArray();
 todo3.pushTodoToArray();
 todo4.pushTodoToArray();
 saveToLocalStorage();
-}
-
-
+};
 
 // View all projects and display them
 console.log(Project.viewAllProjects());
@@ -338,11 +353,9 @@ console.log(Project.viewAllProjects());
 
 // Display projects
 document.addEventListener("DOMContentLoaded", () => {
-    displayProjects(projectDiv);
-    displayElementsInContent(0);
-   
+    renderProjects(projectDiv);
+    displayFirstProject();
 });
 
- 
 
-export { Project, myProjects, projectDiv,onTodoDialogSaveButtonClick ,saveToLocalStorage,retrieveFromLocalStorage,ifCurrentProjectIndexForOperationIsUndefined,editCurrentTodo,addProjectLabelToDom,getCurrentProjectIndexForOperation,getCurrentProjectTodos,markCurrentTodoAsIncomplete,markCurrentTodoAsComplete,getCurrentTodoIndex,deleteATodo,removeProjectFromArray,createNewProject,currentTodoIndex};
+export { Project, myProjects, projectDiv,onTodoDialogSaveButtonClick ,saveToLocalStorage,retrieveFromLocalStorage,ifCurrentProjectIndexForOperationIsUndefined,editCurrentTodo,addProjectLabelToDom,getCurrentProjectIndexForOperation,getCurrentProjectTodos,markCurrentTodoAsIncomplete,markCurrentTodoAsComplete,getCurrentTodoIndex,deleteATodo,removeProjectFromArray,createNewProject,currentTodoIndex,setCurrentProjectIndexToLocalStorage};
