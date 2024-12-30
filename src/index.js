@@ -138,25 +138,36 @@ function saveToLocalStorage() {
 
 
 
+
 function retrieveFromLocalStorage() {
     let storedData = JSON.parse(localStorage.getItem("myProjectsLocalStorageArray"));
 
-    myProjects = [];
-    // saveToLocalStorage();
-    
+    myProjects = []; // Reset the projects array.
+
     if (storedData) {
+        // Filter out invalid projects (e.g., those with null titles).
+        storedData = storedData.filter(project => project.title !== null);
+
         storedData.forEach(project => {
-            let newProject = new Project(project.title, project.todos, project.uniqueId);
+            let newProject = new Project(project.title, [], project.uniqueId);
             newProject.currentProjectIdentifier();
             newProject.pushProjectToArray();
-           
-            
-            project.todos.forEach(todo => {
-                let newTodo = new Todo(todo.title, todo.description, todo.dueDate, todo.priority, todo.completed, todo.uniqueId);
-                newTodo.pushTodoToArray();
-            });
-        });
-    };
+
+                      
+                project.todos.forEach(todo => {
+                    let newTodo = new Todo(
+                        todo.title,
+                        todo.description,
+                        todo.dueDate,
+                        todo.priority,
+                        todo.completed,
+                        todo.uniqueId
+                    );
+                    newTodo.pushTodoToArray();
+                });
+            }
+        );
+    }
     return storedData;
 };
 
@@ -266,7 +277,7 @@ function removeProjectFromArray(uniqueIdOfButtonDiv) {
 
 let retrievedStoredProjects = retrieveFromLocalStorage();
 
-if(retrievedStoredProjects.some(project => project.title === "Default project") == false) {
+if(retrievedStoredProjects.some(project => project.title === "Default Project") == false) {
     
 // INITIALIZATION OF THE APP
 // This is to initialize the default project

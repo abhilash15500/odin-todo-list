@@ -260,8 +260,6 @@ function displayElementsInContent(currentProjectIndex) {
 
 
 
-
-
 function removeProjectDiv(button) {
   button.parentElement.remove();
 };
