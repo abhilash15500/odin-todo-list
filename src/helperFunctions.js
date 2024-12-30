@@ -1,4 +1,4 @@
-function helperFunction(tag, classes = [], textContent, src, attributes = {}) {
+function createElementFunction(tag, classes = [], textContent, src, attributes = {}) {
     
     const element = document.createElement(tag);
 
@@ -24,4 +24,4 @@ function helperFunction(tag, classes = [], textContent, src, attributes = {}) {
 };
 
 
-export { helperFunction };
+export { createElementFunction };
