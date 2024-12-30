@@ -6,54 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo list</title>
     <link rel="shortcut icon" type="image/png" href="./images/todo-icon.png" />
-    
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add_circle" />
-
-
-
-
 </head>
 
 <body>
-
     <div id="main-container">
         <div id="sidebar">
-
             <div id="logo-div">
                 <img src="./images/todo-icon.png" alt="logo" id="logo-image">
-
             </div>
 
-
             <div id="add-project-div" class="sidebar-elements">
-                <span class="material-symbols-outlined" id="add-project-icon">
-                    add_circle
-                </span>
+                <span class="material-symbols-outlined" id="add-project-icon">add_circle</span>
                 <p id="add-project-button-text">Add Project</p>
             </div>
 
             <div id="project-div" class="sidebar-elements">
                 <p id="project-label">Projects</p>
-
-
-
-
-
-
-
             </div>
-
         </div>
 
         <div id="content">
             <div class="content-elements">
                 <h2 id="current-project-heading">Untitled Project</h2>
                 <img src="./images/add.svg" alt="" class="add-todos-button">
-
             </div>
             <div id="todos-container-holder">
-
                 <div class="todos-container content-elements">
                     <div class="todo-checkbox-title-div">
                         <div class="todo-checkboxes todo-checkboxes-filled"></div>
@@ -71,30 +50,9 @@
                     </div>
                 </div>
 
-
                 <div class="todos-container content-elements">
                     <div class="todo-checkbox-title-div">
                         <div class="todo-checkboxes"></div>
-                        <p>Fix the bugs in todolist project</p>
-                    </div>
-
-                    <div class="due-date-div">
-                        <img src="./images/calender.svg" alt="calender-image" class="due-date-icon">
-                        <p class="due-date-text">26-10-2024</p>
-                    </div>
-
-                    <div class="todo-buttons-div">
-                        <img src="./images/edit-svg.svg" class="todo-buttons" id="todo-edit-button">
-                        <img src="./images/delete-svg.svg" class="todo-buttons" id="todo-delete-button">
-                    </div>
-                </div>
-
-
-
-                <div class="todos-container content-elements">
-                    <div class="todo-checkbox-title-div">
-                        <div class="todo-checkboxes"></div>
-
                         <p>Fix the bugs in todolist project</p>
                     </div>
 
@@ -109,91 +67,80 @@
                     </div>
                 </div>
             </div>
-
-
-
-
         </div>
 
         <dialog id="project-add-dialog">
-            <form action="">
+            <form class="forms">
                 <div>
-                    <label for="project-title">Project Title?</label>
+                    <label for="project-title">PROJECT TITLE?</label>
                     <input type="text" required id="text-input-project-title">
                 </div>
-                <div>
-                    <button id="project-add-cancel-button" type="button">Cancel</button>
-                    <button id="project-add-save-button" type="button">Save</button>
+                <div id="project-add-dialog-pair-of-buttons">
+                    <button id="project-add-cancel-button" class="cancel-button" type="button">Cancel</button>
+                    <button id="project-add-save-button" class="save-button" type="submit">Save</button>
                 </div>
             </form>
         </dialog>
 
-
-
         <dialog id="todo-add-dialog">
             <form action="">
-                <div>
-                    <label for="text-input-todo-title">Todo Title?</label>
-                    <input type="text" required id="text-input-todo-title" >
+                <div class="input-div">
+                    <label for="text-input-todo-title" class="todo-add-label">TODO TITLE?</label>
+                    <input type="text" class="todo-add-inputs" required id="text-input-todo-title">
                 </div>
 
-                <div>
-                    <label for="text-input-todo-description">Todo description?</label>
-                    <input type="text" required id="text-input-todo-description">
+                <div class="input-div">
+                    <label for="text-input-todo-description" class="todo-add-label">TODO DESCRIPTION?</label>
+                    <input type="text" required id="text-input-todo-description" class="todo-add-inputs">
                 </div>
 
-                <div>
-                    <label for="text-input-todo-due-date">Todo due date?</label>
-                    <input type="date" required id="text-input-todo-due-date">
+                <div class="input-div">
+                    <label for="text-input-todo-due-date" class="todo-add-label">TODO DUE DATE?</label>
+                    <input type="date" required id="text-input-todo-due-date" class="todo-add-inputs">
                 </div>
 
-                <div>
-                    <label for="todo-priority">Priority?</label>
-                    <select id="todo-priority" required>
+                <div class="input-div">
+                    <label for="todo-priority" class="todo-add-label">TODO PRIORITY?</label>
+                    <select id="todo-priority" required class="todo-add-inputs">
                         <option value="high">High</option>
                         <option value="mid">Mid</option>
                         <option value="low">Low</option>
                     </select>
                 </div>
 
-                <div>
-                    <button id="todo-add-cancel-button" type="button">Cancel</button>
-                    <button id="todo-add-save-button" type="button">Save</button>
+                <div id="todo-add-buttons-div">
+                    <button id="todo-add-cancel-button" type="button" class="cancel-button">Cancel</button>
+                    <button id="todo-add-save-button" class="save-button" type="button">Save</button>
                 </div>
             </form>
         </dialog>
     </div>
 
-
     <dialog id="todo-edit-dialog">
         <form action="">
-            <div>
-                <label for="text-edit-input-todo-title">Todo Title?</label>
-                <input type="text" required id="text-edit-input-todo-title">
+            <div class="todo-edit-input-divs">
+                <label for="text-edit-input-todo-title">NEW TITLE?</label>
+                <input type="text" required id="text-edit-input-todo-title" class="todo-edit-inputs">
             </div>
 
-            <div>
-                <label for="text-edit-input-todo-due-date">Todo due date?</label>
-                <input type="date" required id="text-edit-input-todo-due-date">
+            <div class="todo-edit-input-divs">
+                <label for="text-edit-input-todo-due-date">NEW DUE DATE?</label>
+                <input type="date" required id="text-edit-input-todo-due-date" class="todo-edit-inputs">
             </div>
 
-            <div>
-                <button id="todo-edit-cancel-button" type="button">Cancel</button>
-                <button id="todo-edit-save-button" type="button">Save</button>
+            <div id="todo-edit-dialog-buttons">
+                <button id="todo-edit-cancel-button" type="button" class="cancel-button">Cancel</button>
+                <button id="todo-edit-save-button" class="save-button" type="submit">Save</button>
             </div>
-
         </form>
     </dialog>
 
     <dialog id="select-project-popup">
         <div id="project-select-pop-up-div">
-           
-            <p>Please click on a project first :)</p>
+            <p>PLEASE CLICK ON A PROJECT FIRST! :)</p>
             <button class="close-btn">X</button>
         </div>
     </dialog>
-
-
 </body>
 
 </html>
