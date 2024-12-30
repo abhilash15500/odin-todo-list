@@ -147,9 +147,6 @@ function retrieveCurrentProjectIndex() {
     return storedIndex;
 }
 
-
-
-
 function retrieveFromLocalStorage() {
     let storedData = JSON.parse(localStorage.getItem("myProjectsLocalStorageArray"));
 
