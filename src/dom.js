@@ -1,9 +1,12 @@
-import { Project, myProjects, onTodoDialogSaveButtonClick, projectDiv, saveToLocalStorage, retrieveFromLocalStorage, ifCurrentProjectIndexForOperationIsUndefined, editCurrentTodo, addProjectLabelToDom, getCurrentProjectIndexForOperation, getCurrentProjectTodos, markCurrentTodoAsIncomplete, markCurrentTodoAsComplete, getCurrentTodoIndex, currentTodoDataIndex, deleteATodo, removeProjectFromArray, createNewProject, currentTodoIndex } from "./index.js";
+// imports 
+
+import { Project, myProjects, onTodoDialogSaveButtonClick, projectDiv, saveToLocalStorage, retrieveFromLocalStorage, ifCurrentProjectIndexForOperationIsUndefined, editCurrentTodo, addProjectLabelToDom, getCurrentProjectIndexForOperation, getCurrentProjectTodos, markCurrentTodoAsIncomplete, markCurrentTodoAsComplete, getCurrentTodoIndex, currentTodoDataIndex, deleteATodo, removeProjectFromArray, createNewProject, currentTodoIndex, setCurrentProjectIndexToLocalStorage } from "./index.js";
 import deleteIcon from './images/delete-svg.svg';
 import calendarIcon from './images/calender.svg';
 import editIcon from './images/edit-svg.svg';
+import { createElementFunction } from "./helperFunctions.js";
 
-import { helperFunction } from "./helperFunctions.js";
+// variables 
 
 const addProjectButton = document.querySelector("#add-project-div");
 const projectAddCancelButton = document.querySelector("#project-add-cancel-button");
@@ -25,13 +28,17 @@ let textEditInputTodoTitle = document.querySelector("#text-edit-input-todo-title
 let textEditInputTodoDueDate = document.querySelector("#text-edit-input-todo-due-date");
 let selectProjectPopUp = document.querySelector("#select-project-popup");
 let selectProjectPopUpCloseButton = document.querySelector(".close-btn");
+let todoTitle = document.querySelector("#text-input-todo-title");
+let todoDescription = document.querySelector("#text-input-todo-description");
+let todoDueDate = document.querySelector("#text-input-todo-due-date");
+let todoPriority = document.querySelector("#todo-priority");
 
 
-
+// event listeners 
 
 addTodoButton.addEventListener("click", () => {
-  if(typeof currentProjectIndexForOperation == "undefined") {
-    
+  if (typeof currentProjectIndexForOperation == "undefined") {
+
     selectProjectPopUp.showModal();
   }
   else {
@@ -40,7 +47,7 @@ addTodoButton.addEventListener("click", () => {
 });
 
 
-selectProjectPopUpCloseButton.addEventListener("click",()=>{
+selectProjectPopUpCloseButton.addEventListener("click", () => {
   selectProjectPopUp.close();
 });
 
@@ -49,16 +56,25 @@ todoAddDialogCancelButton.addEventListener("click", () => {
 });
 
 
-todoAddDialogSaveButton.addEventListener("click", () => {
+todoAddDialogSaveButton.addEventListener("click", (event) => {
+  if (!todoTitle.value.trim() || !todoDescription.value.trim() || !todoDueDate.value.trim() || !todoPriority.value.trim()) {
+    event.preventDefault();
+    return;
+  }
+
   onTodoDialogSaveButtonClick();
   todoAddDialog.close();
   ifCurrentProjectIndexForOperationIsUndefined(currentProjectIndexForOperation);
   saveToLocalStorage();
-  displayElementsInContent(currentProjectIndexForOperation);
+  renderTodos(currentProjectIndexForOperation);
 });
 
 
-todoEditSaveButton.addEventListener("click", () => {
+todoEditSaveButton.addEventListener("click", (event) => {
+  if (!textEditInputTodoTitle.value.trim() || !textEditInputTodoDueDate.value.trim()) {
+    event.preventDefault();
+    return;
+  };
 
   todoEditDialog.close();
 
@@ -72,33 +88,62 @@ todoEditSaveButton.addEventListener("click", () => {
 
   editCurrentTodo(currentProjectIndexForOperation, currentTodoIndex, titleValue, dueDateValue);
   saveToLocalStorage();
-  displayElementsInContent(currentProjectIndexForOperation);
+  renderTodos(currentProjectIndexForOperation);
 });
-
 
 todoEditCancelButton.addEventListener("click", () => {
   todoEditDialog.close();
 });
 
+todosCheckboxes.forEach(checkbox => {
+  checkbox.addEventListener("click", () => {
+    checkbox.classList.toggle("todo-checkboxes-filled");
+  });
+});
 
 
-function displayProjects(projectDiv) {
-  projectDiv.innerHTML = "";    
+
+addProjectButton.addEventListener("click", () => {
+  const projectAddDialog = document.querySelector("#project-add-dialog");
+  showProjectAddDialog();
+});
+
+projectAddCancelButton.addEventListener("click", () => {
+  const projectAddDialog = document.querySelector("#project-add-dialog");
+  closeProjectAddDialog();
+});
+
+projectAddSaveButton.addEventListener("click", (event) => {
+  if (!textInputProjectTitle.value.trim()) {
+    event.preventDefault();
+    return;
+  }
+  createNewProject(textInputProjectTitle);
+  closeProjectAddDialog();
+  renderProjects(projectDiv);
+});
+
+
+
+
+// functions 
+function renderProjects(projectDiv) {
+  projectDiv.innerHTML = "";
   let listOfProjects = Project.viewAllProjects();    //get list of projects
- 
+
   addProjectLabelToDom();
 
   listOfProjects.forEach(project => {
 
-    let projectInstances = helperFunction('div', ['sidebar-elements', 'project-instances'], '', '', { 'data-index': project.uniqueId });
+    let projectInstances = createElementFunction('div', ['sidebar-elements', 'project-instances'], '', '', { 'data-index': project.uniqueId });
 
-    let projectIconTextDiv = helperFunction('div', ['project-icon-text-div']);
+    let projectIconTextDiv = createElementFunction('div', ['project-icon-text-div']);
 
-    let orangeCircle = helperFunction('div', ['orange-circle']);
+    let orangeCircle = createElementFunction('div', ['orange-circle']);
 
-    let projectInstanceText = helperFunction('p', ['project-instance-text'], `${project.title}`);
+    let projectInstanceText = createElementFunction('p', ['project-instance-text'], `${project.title}`);
 
-    let projectDeleteButton = helperFunction('img', ['project-delete-button'], '', `${deleteIcon}`)
+    let projectDeleteButton = createElementFunction('img', ['project-delete-button'], '', `${deleteIcon}`)
 
     projectDiv.appendChild(projectInstances);
     projectInstances.appendChild(projectIconTextDiv);
@@ -112,7 +157,7 @@ function displayProjects(projectDiv) {
 
       currentProjectIndexForOperation = getCurrentProjectIndexForOperation(uniqueIdOfProject, currentProjectIndexForOperation);
 
-      displayElementsInContent(currentProjectIndexForOperation);
+      renderTodos(currentProjectIndexForOperation);
     });
   });
 
@@ -137,7 +182,7 @@ function emptyDivFillerDom() {
 };
 
 
-function displayElementsInContent(currentProjectIndex) {
+function renderTodos(currentProjectIndex) {
   todosContainerHolder.innerHTML = "";
   currentProjectHeading.textContent = myProjects[currentProjectIndex].title;
   let currentProjectTodos = getCurrentProjectTodos(currentProjectIndex);
@@ -145,21 +190,21 @@ function displayElementsInContent(currentProjectIndex) {
   currentProjectTodos.forEach(todo => {
     if (todo.completed == true) {
 
-      let orangeFilledCircleDiv = helperFunction("div", ["todo-checkboxes", "todo-checkboxes-filled"]);
+      let orangeFilledCircleDiv = createElementFunction("div", ["todo-checkboxes", "todo-checkboxes-filled"]);
 
       orangeFilledCircleDiv.addEventListener("click", (event) => {
         markCurrentTodoAsIncomplete(event, currentProjectIndex, currentTodoIndex);
-        displayElementsInContent(currentProjectIndex);
+        renderTodos(currentProjectIndex);
       });
 
 
-      let finishedTodoParagraph = helperFunction('p', ["finished-todo"], `${todo.title}`);
+      let finishedTodoParagraph = createElementFunction('p', ["finished-todo"], `${todo.title}`);
 
-      let dateImage = helperFunction('img', ["due-date-icon"], '', `${calendarIcon}`)
+      let dateImage = createElementFunction('img', ["due-date-icon"], '', `${calendarIcon}`)
 
-      let dueDateParagraph = helperFunction('p', ["due-date-text", "due-date-text-striked"], `${todo.dueDate}`)
+      let dueDateParagraph = createElementFunction('p', ["due-date-text", "due-date-text-striked"], `${todo.dueDate}`)
 
-      let editImage = helperFunction('img', ["todo-buttons"], '', `${editIcon}`);
+      let editImage = createElementFunction('img', ["todo-buttons"], '', `${editIcon}`);
 
       editImage.addEventListener("click", (event) => {
 
@@ -176,21 +221,24 @@ function displayElementsInContent(currentProjectIndex) {
       });
 
 
-      let deleteImage = helperFunction('img', ["todo-buttons"], "", `${deleteIcon}`);
+      let deleteImage = createElementFunction('img', ["todo-buttons"], "", `${deleteIcon}`);
 
       deleteImage.addEventListener("click", (event) => {
         event.target.parentElement.parentElement.remove();  // for dom
 
         // for logic
         let currentTodoDataIndex = event.target.parentElement.parentElement.getAttribute('data-index');
+
+        setCurrentProjectIndexToLocalStorage(currentProjectIndex);
+
         deleteATodo(currentTodoDataIndex);
         saveToLocalStorage();
       });
 
-      let todoCheckBoxTitleDiv = helperFunction('div', ['todo-checkbox-title-div']);
-      let dueDateDiv = helperFunction('div', ['due-date-div']);
-      let todoButtonsDiv = helperFunction('div', ['todo-buttons-div']);
-      let todosContainer = helperFunction('div', ['todos-container', 'content-elements'], "", "", { 'data-index': `${todo.uniqueId}` });
+      let todoCheckBoxTitleDiv = createElementFunction('div', ['todo-checkbox-title-div']);
+      let dueDateDiv = createElementFunction('div', ['due-date-div']);
+      let todoButtonsDiv = createElementFunction('div', ['todo-buttons-div']);
+      let todosContainer = createElementFunction('div', ['todos-container', 'content-elements'], "", "", { 'data-index': `${todo.uniqueId}` });
 
       todosContainerHolder.append(todosContainer);
       todosContainer.append(todoCheckBoxTitleDiv, dueDateDiv, todoButtonsDiv);
@@ -200,26 +248,24 @@ function displayElementsInContent(currentProjectIndex) {
 
     } else if (todo.completed == false) {
 
-      let orangeUnfilledCircleDiv = helperFunction("div", ["todo-checkboxes"]);
+      let orangeUnfilledCircleDiv = createElementFunction("div", ["todo-checkboxes"]);
 
       orangeUnfilledCircleDiv.addEventListener("click", (event) => {
 
         markCurrentTodoAsComplete(event, currentProjectIndex, currentTodoIndex);
-        displayElementsInContent(currentProjectIndex);
+        renderTodos(currentProjectIndex);
       });
 
+      let todoParagraph = createElementFunction("p", [], `${todo.title}`);
 
-      let todoParagraph = helperFunction("p", [], `${todo.title}`);
+      let dateImage = createElementFunction("img", ["due-date-icon"], '', `${calendarIcon}`);
 
-      let dateImage = helperFunction("img", ["due-date-icon"], '', `${calendarIcon}`);
+      let dueDateParagraph = createElementFunction('p', ["due-date-text"], `${todo.dueDate}`);
 
-      let dueDateParagraph = helperFunction('p', ["due-date-text"], `${todo.dueDate}`);
-
-      let editImage = helperFunction("img", ["todo-buttons"], '', `${editIcon}`);
+      let editImage = createElementFunction("img", ["todo-buttons"], '', `${editIcon}`);
 
 
       editImage.addEventListener("click", (event) => {
-
         let clickedTodoDatasetIndexNumber = event.target.parentElement.parentElement.getAttribute('data-index');
         getCurrentTodoIndex(currentProjectIndex, clickedTodoDatasetIndexNumber, event);
         console.log(`${currentProjectIndex} is curr pro index and ${currentTodoIndex}`);
@@ -227,27 +273,27 @@ function displayElementsInContent(currentProjectIndex) {
         todoEditDialog.showModal();
       });
 
-
-      let deleteImage = helperFunction('img', ["todo-buttons"], '', `${deleteIcon}`);
+      let deleteImage = createElementFunction('img', ["todo-buttons"], '', `${deleteIcon}`);
 
       deleteImage.addEventListener("click", (event) => {
         event.target.parentElement.parentElement.remove();  //dom
 
         //logic 
         let currentTodoDataIndex = event.target.parentElement.parentElement.getAttribute('data-index');
+
+        setCurrentProjectIndexToLocalStorage(currentProjectIndex);
         deleteATodo(currentTodoDataIndex);
         saveToLocalStorage();
       });
 
 
-      let todoCheckBoxTitleDiv = helperFunction('div', ["todo-checkbox-title-div"]);
+      let todoCheckBoxTitleDiv = createElementFunction('div', ["todo-checkbox-title-div"]);
 
-      let dueDateDiv = helperFunction('div', ["due-date-div"]);
+      let dueDateDiv = createElementFunction('div', ["due-date-div"]);
 
-      let todoButtonsDiv = helperFunction('div', ["todo-buttons-div"]);
+      let todoButtonsDiv = createElementFunction('div', ["todo-buttons-div"]);
 
-      let todosContainer = helperFunction('div', ["todos-container", "content-elements"], '', '', { 'data-index': todo.uniqueId });
-
+      let todosContainer = createElementFunction('div', ["todos-container", "content-elements"], '', '', { 'data-index': todo.uniqueId });
 
       todosContainerHolder.append(todosContainer);
       todosContainer.append(todoCheckBoxTitleDiv, dueDateDiv, todoButtonsDiv);
@@ -257,7 +303,6 @@ function displayElementsInContent(currentProjectIndex) {
     };
   });
 };
-
 
 
 function removeProjectDiv(button) {
@@ -281,33 +326,9 @@ function showValuesOnEditForm(event) {
   const thirdChild = secondChild.children[1];
   const fourthChild = parent.children[1];
   const fifthChild = parent.children[1];
-
   textEditInputTodoTitle.value = thirdChild.textContent;
   textEditInputTodoDueDate.value = fifthChild.textContent;
 };
 
 
-todosCheckboxes.forEach(checkbox => {
-  checkbox.addEventListener("click", () => {
-    checkbox.classList.toggle("todo-checkboxes-filled");
-  });
-});
-
-addProjectButton.addEventListener("click", () => {
-  const projectAddDialog = document.querySelector("#project-add-dialog");
-  showProjectAddDialog();
-});
-
-projectAddCancelButton.addEventListener("click", () => {
-  const projectAddDialog = document.querySelector("#project-add-dialog");
-  closeProjectAddDialog();
-});
-
-projectAddSaveButton.addEventListener("click", () => {
-  createNewProject(textInputProjectTitle);
-  closeProjectAddDialog();
-  
-  displayProjects(projectDiv);
-});
-
-export { displayProjects, displayElementsInContent };
+export { renderProjects, renderTodos };
