@@ -1,11 +1,12 @@
 :root {
-  --orangered: orangered;
+  --primary-color: orangered;
+  --secondary-color: #282828;
+  --tertiary-color: #1e1e1e;
 }
 
 * {
-  /* margin: 0; */
   padding: 0;
-  font-family: 'comic sans ms','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'comic sans ms', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-sizing: border-box;
   color: white;
   font-weight: 400;
@@ -13,6 +14,11 @@
 
 *:not(dialog) {
   margin: 0;
+}
+
+body ::selection {
+  background: var(--primary-color);
+  color: white;
 }
 
 #main-container {
@@ -24,18 +30,18 @@
 }
 
 #sidebar {
-  background-color: #282828;
+  background-color: var(--secondary-color);
 }
 
 #content {
-  background-color: #1e1e1e;
+  background-color: var(--tertiary-color);
 }
 
 #logo-div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
 }
 
 #logo-image {
@@ -47,7 +53,7 @@
 
 #project-label {
   font-size: 15px;
-  font-weight: 400 ;
+  font-weight: 400;
   color: white;
   background-color: #afb3ac41;
   padding: 10px;
@@ -68,12 +74,12 @@
 }
 
 #add-project-button-text {
-  color: var(--orangered);
+  color: var(--primary-color);
   font-weight: 600;
 }
 
 #add-project-icon {
-  color: var(--orangered);
+  color: var(--primary-color);
 }
 
 .project-instances {
@@ -102,7 +108,7 @@
 }
 
 .orange-circle {
-  background-color: var(--orangered);
+  background-color: var(--primary-color);
   border-radius: 50%;
   height: 11px;
   width: 11px;
@@ -123,7 +129,7 @@
   font-weight: 800;
   font-size: 45px;
   margin-top: 50px;
-  color: var(--orangered);
+  color: var(--primary-color);
   margin-bottom: 55px;
 }
 
@@ -156,7 +162,7 @@
 }
 
 .todo-checkboxes {
-  border: 3px solid var(--orangered);
+  border: 3px solid var(--primary-color);
   border-radius: 50%;
   width: 22px;
   height: 22px;
@@ -164,7 +170,7 @@
 }
 
 .todo-checkboxes-filled {
-  background-color: var(--orangered);
+  background-color: var(--primary-color);
 }
 
 .finished-todo {
@@ -183,15 +189,81 @@
 }
 
 #project-add-dialog {
-  background-color: #1e1e1e;
-  padding: 30px;
+  background-color: var(--tertiary-color);
+  padding: 20px;
+  box-shadow: 0 0 10px 500vw rgba(0, 0, 0, 0.6);
+  border: 5px solid gray;
+}
+
+#project-add-dialog-pair-of-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  gap: 7px;
+}
+
+.save-button {
+  background-color: var(--primary-color);
+  padding: 2px;
+  width: 100px;
+  height: 35px;
+  border-radius: 5px;
+  font-weight: 400;
+  cursor: pointer;
+  border: 2px solid var(--primary-color);
+}
+
+.cancel-button {
+  background-color: white;
+  color: black;
+  padding: 2px;
+  width: 100px;
+  height: 35px;
+  border-radius: 5px;
+  font-weight: 400;
+  cursor: pointer;
+  border: 2px solid white;
+}
+
+#text-input-project-title {
+  padding-left: 5px;
+  background-color: rgb(212, 208, 208);
+  color: var(--primary-color);
+  font-weight: 600;
+  height: 26px;
 }
 
 #todo-add-dialog {
-  top: 40vh;
-  left: 40vw;
-  background-color: #1e1e1e;
-  padding: 10px;
+  background-color: var(--tertiary-color);
+  padding: 15px;
+  box-shadow: 0 0 10px 500vw rgba(0, 0, 0, 0.6);
+  border: 5px solid gray;
+}
+
+.input-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 5px;
+  margin-bottom: 10px;
+}
+
+.todo-add-inputs {
+border-radius: 5px;
+  width: 210px;
+  height: 32px;
+  background-color: rgb(212, 208, 208);
+  color: var(--primary-color);
+  padding-left: 5px;
+  font-weight: 800;
+}
+
+#todo-add-buttons-div {
+  margin-top: 10px;
+  gap: 7px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .text-input {
@@ -208,7 +280,6 @@
   margin-top: 7vh;
 }
 
-/* Popup container */
 #project-select-pop-up-div {
   display: flex;
   flex-direction: row;
@@ -219,14 +290,14 @@
   padding: 20px;
   position: fixed;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px 500vw rgba(0, 0, 0, 0.6);
   align-items: center;
   justify-content: space-between;
 }
 
 .close-btn {
   align-self: center;
-  background-color: var(--orangered);
+  background-color: var(--primary-color);
   color: white;
   border: none;
   padding: 8px 12px;
@@ -234,4 +305,36 @@
   cursor: pointer;
   border-radius: 50%;
   align-self: flex-end;
+}
+
+#todo-edit-dialog {
+  box-shadow: 0 0 10px 500vw rgba(0, 0, 0, 0.6);
+  background-color: var(--tertiary-color);
+  padding: 15px;
+  border: 5px solid gray;
+}
+
+.todo-edit-input-divs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 7px;
+}
+
+.todo-edit-inputs {
+  width: 240px;
+  height: 30px;
+  background-color: rgb(212, 208, 208);
+  color: var(--primary-color);
+  font-weight: 800;
+  padding-left: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+#todo-edit-dialog-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 7px;
 }
