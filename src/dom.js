@@ -330,5 +330,4 @@ function showValuesOnEditForm(event, currentProjectIndex, currentTodoIndex) {
   textEditInputTodoPriority.value = myProjects[currentProjectIndex].todos[currentTodoIndex].priority;
 };
 
-
 export { renderProjects, renderTodos };
