@@ -256,14 +256,18 @@ function deleteATodo(currentTodoDataIndex) {
             delete myProjects[currentProjectIndex].todos[currentTodoIndex];
 };
 
+
 function isFutureDate(date) {
     const today = new Date();
     const dateToCheck = new Date(date);
-    // Set time to midnight for both dates
-    today.setHours(0, 0, 0, 0);
-    dateToCheck.setHours(0, 0, 0, 0);
+    
+    // Set time to midnight for both dates using UTC to avoid time zone issues
+    today.setUTCHours(0, 0, 0, 0);
+    dateToCheck.setUTCHours(0, 0, 0, 0);
+    
     return dateToCheck >= today; // Return true if it's today or in the future
 };
+
 
 
 function removeProjectFromArray(uniqueIdOfButtonDiv) {
