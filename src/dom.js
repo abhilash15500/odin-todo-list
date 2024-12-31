@@ -1,6 +1,6 @@
 // imports 
 
-import { Project, myProjects, onTodoDialogSaveButtonClick, projectDiv, saveToLocalStorage, retrieveFromLocalStorage, ifCurrentProjectIndexForOperationIsUndefined, editCurrentTodo, addProjectLabelToDom, getCurrentProjectIndexForOperation, getCurrentProjectTodos, markCurrentTodoAsIncomplete, markCurrentTodoAsComplete, getCurrentTodoIndex, currentTodoDataIndex, deleteATodo, removeProjectFromArray, createNewProject, currentTodoIndex, setCurrentProjectIndexToLocalStorage } from "./index.js";
+import { Project, myProjects, onTodoDialogSaveButtonClick, projectDiv, saveToLocalStorage, retrieveFromLocalStorage, ifCurrentProjectIndexForOperationIsUndefined, editCurrentTodo, addProjectLabelToDom, getCurrentProjectIndexForOperation, getCurrentProjectTodos, markCurrentTodoAsIncomplete, markCurrentTodoAsComplete, getCurrentTodoIndex, currentTodoDataIndex, deleteATodo, removeProjectFromArray, createNewProject, currentTodoIndex, isFutureDate, setCurrentProjectIndexToLocalStorage,setTimeoutDelayForModal } from "./index.js";
 import deleteIcon from './images/delete-svg.svg';
 import calendarIcon from './images/calender.svg';
 import editIcon from './images/edit-svg.svg';
@@ -26,6 +26,9 @@ let todoEditSaveButton = document.querySelector("#todo-edit-save-button");
 let todoEditCancelButton = document.querySelector("#todo-edit-cancel-button");
 let textEditInputTodoTitle = document.querySelector("#text-edit-input-todo-title");
 let textEditInputTodoDueDate = document.querySelector("#text-edit-input-todo-due-date");
+let textEditInputTodoDescription = document.querySelector("#text-edit-input-description");
+let textEditInputTodoPriority = document.querySelector("#todo-edit-priority");
+let fillAllFieldsPopUp = document.querySelector("#fill-out-all-fields-pop-up");
 let selectProjectPopUp = document.querySelector("#select-project-popup");
 let selectProjectPopUpCloseButton = document.querySelector(".close-btn");
 let todoTitle = document.querySelector("#text-input-todo-title");
@@ -38,8 +41,8 @@ let todoPriority = document.querySelector("#todo-priority");
 
 addTodoButton.addEventListener("click", () => {
   if (typeof currentProjectIndexForOperation == "undefined") {
-
     selectProjectPopUp.showModal();
+    setTimeoutDelayForModal(1200,selectProjectPopUp);
   }
   else {
     todoAddDialog.showModal();
@@ -47,18 +50,16 @@ addTodoButton.addEventListener("click", () => {
 });
 
 
-selectProjectPopUpCloseButton.addEventListener("click", () => {
-  selectProjectPopUp.close();
-});
-
 todoAddDialogCancelButton.addEventListener("click", () => {
   todoAddDialog.close();
 });
 
-
 todoAddDialogSaveButton.addEventListener("click", (event) => {
-  if (!todoTitle.value.trim() || !todoDescription.value.trim() || !todoDueDate.value.trim() || !todoPriority.value.trim()) {
+
+  if (!todoTitle.value.trim() || !todoDescription.value.trim() || !todoDueDate.value.trim() || isFutureDate(todoDueDate.value) == false || !todoPriority.value.trim()) {
     event.preventDefault();
+    fillAllFieldsPopUp.showModal();
+    setTimeoutDelayForModal(1700,fillAllFieldsPopUp);
     return;
   }
 
@@ -71,7 +72,10 @@ todoAddDialogSaveButton.addEventListener("click", (event) => {
 
 
 todoEditSaveButton.addEventListener("click", (event) => {
-  if (!textEditInputTodoTitle.value.trim() || !textEditInputTodoDueDate.value.trim()) {
+
+  if (!textEditInputTodoTitle.value.trim() || !textEditInputTodoDueDate.value.trim() || isFutureDate(textEditInputTodoDueDate.value) == false || !textEditInputTodoDescription.value.trim() || !textEditInputTodoPriority) {
+    fillAllFieldsPopUp.showModal();
+    setTimeoutDelayForModal(1700,fillAllFieldsPopUp);
     event.preventDefault();
     return;
   };
@@ -84,12 +88,15 @@ todoEditSaveButton.addEventListener("click", (event) => {
 
   let titleValue = textEditInputTodoTitle.value;
   let dueDateValue = textEditInputTodoDueDate.value;
+  let descriptionValue = textEditInputTodoDescription.value;
+  let priorityValue = textEditInputTodoPriority.value;
 
-
-  editCurrentTodo(currentProjectIndexForOperation, currentTodoIndex, titleValue, dueDateValue);
+  editCurrentTodo(currentProjectIndexForOperation, currentTodoIndex, titleValue, dueDateValue, descriptionValue, priorityValue);
   saveToLocalStorage();
   renderTodos(currentProjectIndexForOperation);
 });
+
+
 
 todoEditCancelButton.addEventListener("click", () => {
   todoEditDialog.close();
@@ -102,14 +109,12 @@ todosCheckboxes.forEach(checkbox => {
 });
 
 
-
 addProjectButton.addEventListener("click", () => {
   const projectAddDialog = document.querySelector("#project-add-dialog");
   showProjectAddDialog();
 });
 
 projectAddCancelButton.addEventListener("click", () => {
-  const projectAddDialog = document.querySelector("#project-add-dialog");
   closeProjectAddDialog();
 });
 
@@ -212,9 +217,8 @@ function renderTodos(currentProjectIndex) {
 
         getCurrentTodoIndex(currentProjectIndex, clickedTodoDatasetIndexNumber, event);
 
-        console.log(`${currentProjectIndex} is curr pro index and ${currentTodoIndex}`);
 
-        showValuesOnEditForm(event);
+        showValuesOnEditForm(event, currentProjectIndex, currentTodoIndex);
 
         todoEditDialog.showModal();
 
@@ -268,8 +272,7 @@ function renderTodos(currentProjectIndex) {
       editImage.addEventListener("click", (event) => {
         let clickedTodoDatasetIndexNumber = event.target.parentElement.parentElement.getAttribute('data-index');
         getCurrentTodoIndex(currentProjectIndex, clickedTodoDatasetIndexNumber, event);
-        console.log(`${currentProjectIndex} is curr pro index and ${currentTodoIndex}`);
-        showValuesOnEditForm(event);
+        showValuesOnEditForm(event, currentProjectIndex, currentTodoIndex);
         todoEditDialog.showModal();
       });
 
@@ -320,14 +323,11 @@ function showProjectAddDialog() {
 };
 
 
-function showValuesOnEditForm(event) {
-  const parent = event.target.parentElement.parentElement; // Navigate up
-  const secondChild = parent.children[0]; // Access the second child (the child at index 1)
-  const thirdChild = secondChild.children[1];
-  const fourthChild = parent.children[1];
-  const fifthChild = parent.children[1];
-  textEditInputTodoTitle.value = thirdChild.textContent;
-  textEditInputTodoDueDate.value = fifthChild.textContent;
+function showValuesOnEditForm(event, currentProjectIndex, currentTodoIndex) {
+  textEditInputTodoTitle.value = myProjects[currentProjectIndex].todos[currentTodoIndex].title;
+  textEditInputTodoDueDate.value = myProjects[currentProjectIndex].todos[currentTodoIndex].dueDate;
+  textEditInputTodoDescription.value = myProjects[currentProjectIndex].todos[currentTodoIndex].description;
+  textEditInputTodoPriority.value = myProjects[currentProjectIndex].todos[currentTodoIndex].priority;
 };
 
 

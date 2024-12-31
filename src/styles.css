@@ -281,18 +281,16 @@ border-radius: 5px;
 }
 
 #project-select-pop-up-div {
-  display: flex;
-  flex-direction: row;
   background-color: #333;
   color: white;
   width: 350px;
   top: 10px;
+  left: 40vw;
   padding: 20px;
   position: fixed;
   border-radius: 10px;
   box-shadow: 0 0 10px 500vw rgba(0, 0, 0, 0.6);
-  align-items: center;
-  justify-content: space-between;
+  
 }
 
 .close-btn {
@@ -337,4 +335,13 @@ border-radius: 5px;
   flex-direction: row;
   justify-content: flex-end;
   gap: 7px;
+}
+
+#fill-out-all-fields-pop-up {
+  background-color: #333;
+  color: white;
+  width: 350px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 500vw rgba(0, 0, 0, 0.6);
 }

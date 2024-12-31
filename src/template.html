@@ -13,7 +13,7 @@
 <body>
     <div id="main-container">
         <div id="sidebar">
-            <div id="logo-div"> 
+            <div id="logo-div">
                 <img src="./images/todo-icon.png" alt="logo" id="logo-image">
             </div>
 
@@ -102,9 +102,9 @@
                 <div class="input-div">
                     <label for="todo-priority" class="todo-add-label">TODO PRIORITY?</label>
                     <select id="todo-priority" required class="todo-add-inputs">
-                        <option value="high">High</option>
-                        <option value="mid">Mid</option>
-                        <option value="low">Low</option>
+                        <option value="high">high</option>
+                        <option value="mid">mid</option>
+                        <option value="low">low</option>
                     </select>
                 </div>
 
@@ -128,19 +128,41 @@
                 <input type="date" required id="text-edit-input-todo-due-date" class="todo-edit-inputs">
             </div>
 
+            <div class="todo-edit-input-divs">
+                <label for="text-edit-input-description">NEW DESCRIPTION?</label>
+                <input type="text" required id="text-edit-input-description" class="todo-edit-inputs">
+            </div>
+
+            <div class="todo-edit-input-divs">
+                <label for="todo-edit-priority">TODO PRIORITY?</label>
+                <select id="todo-edit-priority" required class="todo-edit-inputs">
+                    <option value="high">high</option>
+                    <option value="mid">mid</option>
+                    <option value="low">low</option>
+                </select>
+            </div>
+
             <div id="todo-edit-dialog-buttons">
                 <button id="todo-edit-cancel-button" type="button" class="cancel-button">Cancel</button>
-                <button id="todo-edit-save-button" class="save-button" type="submit">Save</button>
+                <button id="todo-edit-save-button" class="save-button" type="button">Save</button>
             </div>
+
+
         </form>
     </dialog>
 
     <dialog id="select-project-popup">
         <div id="project-select-pop-up-div">
             <p>PLEASE CLICK ON A PROJECT FIRST! :)</p>
-            <button class="close-btn">X</button>
         </div>
     </dialog>
+
+    <dialog id="fill-out-all-fields-pop-up">
+        <div id="fill-out-all-fields-pop-up-div">
+            <p>PLEASE FILL OUT ALL FIELDS AND DO NOT SELECT PAST DATE! :)</p>
+        </div>
+    </dialog>
+
 </body>
 
 </html>

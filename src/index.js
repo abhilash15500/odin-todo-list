@@ -36,13 +36,11 @@ class Todo {
         }
     }
 
-    viewTodo() {
-        console.log(this);
-    }
-
-    editTodo(newTitle, newDueDate, newCompleted) {
+    editTodo(newTitle, newDueDate,newDescription,newPriority, newCompleted) {
         this.title = newTitle;
         this.dueDate = newDueDate;
+        this.description = newDescription;
+        this.priority = newPriority;
         this.completed = newCompleted;
         saveToLocalStorage();
         
@@ -56,7 +54,6 @@ class Todo {
         delete myProjects[currentProjectIndex].todos[currentTodoIndex];
     }
 }
-
 
 
 class Project {
@@ -75,11 +72,9 @@ class Project {
         currentProjectIndex = myProjects.findIndex(
             (project) => project !== undefined && project.uniqueId == uniqueIdOfProject
         );
-        console.log(`${currentProjectIndex} is the current project index!`);
         return currentProjectIndex;
     }
 
-  
 
     viewTodos() {
         return this.todos.map((todo) => {
@@ -183,13 +178,9 @@ function retrieveFromLocalStorage() {
 
 //utility functions 
 function createNewProject(textInputProjectTitle) {
-    
     let newProject = new Project(textInputProjectTitle.value);
-      newProject.pushProjectToArray();
-      console.log(myProjects);
-      
-      saveToLocalStorage();
-      
+      newProject.pushProjectToArray();  
+      saveToLocalStorage();    
 };
 
 
@@ -210,9 +201,9 @@ function ifCurrentProjectIndexForOperationIsUndefined(currentProjectIndexForOper
   }};
 
 
-function editCurrentTodo(currentProjectIndexForOperation,currentTodoIndex,titleValue,dueDateValue) {
+function editCurrentTodo(currentProjectIndexForOperation,currentTodoIndex,titleValue,dueDateValue,descriptionValue,priorityValue) {
      
-    myProjects[currentProjectIndexForOperation].todos[currentTodoIndex].editTodo(titleValue,dueDateValue,false);
+    myProjects[currentProjectIndexForOperation].todos[currentTodoIndex].editTodo(titleValue,dueDateValue,descriptionValue,priorityValue,false);
 }
 
 function getCurrentTodoIndex(currentProjectIndex,clickedTodoDatasetIndexNumber,event) {
@@ -233,7 +224,6 @@ function addProjectLabelToDom() {
 
 function getCurrentProjectIndexForOperation(uniqueIdOfProject,currentProjectIndexForOperation) {
     currentProjectIndexForOperation = myProjects.findIndex(project => project !== undefined && project!== null && project.uniqueId == uniqueIdOfProject);
-    console.log(currentProjectIndexForOperation);
     currentProjectIndexForOperation = myProjects[currentProjectIndexForOperation].currentProjectIdentifier();
     return currentProjectIndexForOperation;
 };
@@ -248,40 +238,52 @@ function markCurrentTodoAsIncomplete(event,currentProjectIndex,currentTodoIndex)
     let clickedTodoDatasetIndexNumber = event.target.parentElement.parentElement.getAttribute('data-index');
     currentTodoIndex = myProjects[currentProjectIndex].todos.findIndex(todo => todo !== undefined && todo.uniqueId == clickedTodoDatasetIndexNumber);
     myProjects[currentProjectIndex].todos[currentTodoIndex].markTodoAsIncomplete();
-    console.log(myProjects);
 };
 
 
 function markCurrentTodoAsComplete(event,currentProjectIndex,currentTodoIndex){
     let clickedTodoDatasetIndexNumber = event.target.parentElement.parentElement.getAttribute('data-index');
-        
         currentTodoIndex = myProjects[currentProjectIndex].todos.findIndex(todo => todo !== undefined && todo.uniqueId == clickedTodoDatasetIndexNumber);
-
         myProjects[currentProjectIndex].todos[currentTodoIndex].markTodoAsComplete();
-        console.log(myProjects);
 };
-
 
 
 
 function deleteATodo(currentTodoDataIndex) {
     currentProjectIndex = retrieveCurrentProjectIndex();
    
-
             let currentTodoIndex = myProjects[currentProjectIndex].todos.findIndex(todo => todo !== undefined && todo.uniqueId == currentTodoDataIndex);
-    
             delete myProjects[currentProjectIndex].todos[currentTodoIndex];
-            console.log(myProjects);
+};
+
+function isFutureDate(date) {
+    const today = new Date();
+    const dateToCheck = new Date(date);
+    // Set time to midnight for both dates
+    today.setHours(0, 0, 0, 0);
+    dateToCheck.setHours(0, 0, 0, 0);
+    return dateToCheck >= today; // Return true if it's today or in the future
 };
 
 
 function removeProjectFromArray(uniqueIdOfButtonDiv) {
-    let indexToDelete = myProjects.findIndex(project => project !== undefined && project.uniqueId == uniqueIdOfButtonDiv);
-  
+    let indexToDelete = myProjects.findIndex(project => project !== undefined && project.uniqueId == uniqueIdOfButtonDiv); 
     delete myProjects[indexToDelete]
-    console.log(myProjects);
     saveToLocalStorage();
   }
+
+  // Helper function to get tomorrow's date
+function getTomorrowDate() {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1); 
+    return tomorrow.toISOString().split('T')[0]; // Format to YYYY-MM-DD
+}
+  
+function setTimeoutDelayForModal(timeout,modal) {
+    setTimeout(() => {
+        modal.close(); // Close the modal
+      }, timeout);
+}
 
 
   function displayFirstProject() {
@@ -293,7 +295,10 @@ function removeProjectFromArray(uniqueIdOfButtonDiv) {
 // INITIALIZATION OF THE APP
 // INITIALIZATION OF THE APP
 
+
+
 let retrievedStoredProjects = retrieveFromLocalStorage();
+
 if(retrievedStoredProjects.some(project => project.title === "Default Project") == false) {
     
 // This is to initialize the default project
@@ -302,41 +307,40 @@ defaultProject.pushProjectToArray();
 
 // Creating initial todos for the default project
 
+// Create Todo objects with tomorrow's date dynamically
 const todo1 = new Todo(
     "Create a Simple Web Page",
     "Build a webpage with a header, paragraph, image, and a styled button.",
-    "2024-12-11",
-    "High",
+    getTomorrowDate(),  // Automatically set to tomorrow's date
+    "high",
     false
 );
 
 const todo2 = new Todo(
     "Learn CSS Flexbox",
     "Practice aligning elements using Flexbox properties like `justify-content` and `align-items`.",
-    "2024-12-12",
-    "Medium",
+    getTomorrowDate(),  // Automatically set to tomorrow's date
+    "mid",
     false
 );
 
 const todo3 = new Todo(
     "Add Interactivity with JavaScript",
     "Create a webpage where clicking a button changes the background color.",
-    "2024-12-13",
-    "High",
+    getTomorrowDate(),  // Automatically set to tomorrow's date
+    "low",
     false
 );
 
 const todo4 = new Todo(
     "Build a Responsive Navigation Bar",
     "Design a mobile-friendly navigation bar with a dropdown menu using HTML, CSS, and media queries.",
-    "2024-12-15",
-    "High",
+    getTomorrowDate(),  // Automatically set to tomorrow's date
+    "high",
     false
 );
 
-
 defaultProject.currentProjectIdentifier();
-// Add new todos to the default project (index 0)
 todo1.pushTodoToArray();
 todo2.pushTodoToArray();
 todo3.pushTodoToArray();
@@ -344,8 +348,6 @@ todo4.pushTodoToArray();
 saveToLocalStorage();
 };
 
-// View all projects and display them
-console.log(Project.viewAllProjects());
 
 
 // Display projects
@@ -355,4 +357,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-export { Project, myProjects, projectDiv,onTodoDialogSaveButtonClick ,saveToLocalStorage,retrieveFromLocalStorage,ifCurrentProjectIndexForOperationIsUndefined,editCurrentTodo,addProjectLabelToDom,getCurrentProjectIndexForOperation,getCurrentProjectTodos,markCurrentTodoAsIncomplete,markCurrentTodoAsComplete,getCurrentTodoIndex,deleteATodo,removeProjectFromArray,createNewProject,currentTodoIndex,setCurrentProjectIndexToLocalStorage};
+export { Project, myProjects, projectDiv,onTodoDialogSaveButtonClick ,saveToLocalStorage,retrieveFromLocalStorage,ifCurrentProjectIndexForOperationIsUndefined,editCurrentTodo,addProjectLabelToDom,getCurrentProjectIndexForOperation,getCurrentProjectTodos,markCurrentTodoAsIncomplete,markCurrentTodoAsComplete,getCurrentTodoIndex,deleteATodo,removeProjectFromArray,createNewProject,currentTodoIndex,setCurrentProjectIndexToLocalStorage,isFutureDate,setTimeoutDelayForModal};
